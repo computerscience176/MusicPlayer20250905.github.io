@@ -1,1 +1,2 @@
-println("HelloWorld");
+print("HelloWorld");
+println("Hi");
