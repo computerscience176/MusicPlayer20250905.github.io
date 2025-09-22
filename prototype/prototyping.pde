@@ -1,3 +1,7 @@
+fullScreen(displayWidth); //displayWidth //displayHeight
+int appWidth = displayWidth;
+int appHeight = displayHeight;
+
 float logoX = appWidth * 0.2;
 float logoY = appHeight * 1;
 float logoWidth = appWidth * 1;
