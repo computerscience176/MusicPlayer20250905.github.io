@@ -3,43 +3,43 @@ int appWidth = displayWidth;
 int appHeight = displayHeight;
 
 float logoX = appWidth * 0.2/16;
-float logoY = appHeight * 1/24;
+float logoY = appHeight * 0/24;
 float logoWidth = appWidth * 1/16;
 float logoHeight = appHeight * 1/24;
 rect(logoX, logoY, logoWidth, logoHeight);
 
 float websiteNameX = appWidth * 1.2/16;
-float websiteNameY = appHeight * 1/24;
+float websiteNameY = appHeight * 0/24;
 float websiteNameWidth = appWidth * 4.8/16;
 float websiteNameHeight = appHeight * 1/24;
 rect(websiteNameX, websiteNameY, websiteNameWidth, websiteNameHeight);
 
 float searchIconX = appWidth * 6/16;
-float searchIconY = appHeight * 1/24;
+float searchIconY = appHeight * 0/24;
 float searchIconWidth = appWidth * 0.5/16;
 float searchIconHeight = appHeight * 1/24;
 rect(searchIconX, searchIconY, searchIconWidth, searchIconHeight);
 
 float searchX = appWidth * 6.8/16;
-float searchY = appHeight * 1/24;
+float searchY = appHeight * 0/24;
 float searchWidth = appWidth * 4/16;
 float searchHeight = appHeight * 1/24;
 rect(searchX, searchY, searchWidth, searchHeight);
 
 float profileX = appWidth * 10.8/16;
-float profileY = appHeight * 1/24;
+float profileY = appHeight * 0/24;
 float profileWidth = appWidth * 1.2/16;
 float profileHeight = appHeight * 1/24;
 rect(profileX, profileY, profileWidth, profileHeight);
 
 float accountX = appWidth * 12/16;
-float accountY = appHeight * 1/24;
+float accountY = appHeight * 0/24;
 float accountWidth = appWidth * 2/16;
 float accountHeight = appHeight * 1/24;
 rect(accountX, accountY, accountWidth, accountHeight);
 
 float threeX = appWidth * 14.6/16;
-float threeY = appHeight * 1/24;
+float threeY = appHeight * 0/24;
 float threeWidth = appWidth * 1.5/16;
 float threeHeight = appHeight * 1/24;
 rect(threeX, threeY, threeWidth, threeHeight);
