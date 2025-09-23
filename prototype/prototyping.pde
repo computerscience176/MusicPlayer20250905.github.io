@@ -2,6 +2,12 @@ fullScreen(displayWidth); //displayWidth //displayHeight
 int appWidth = displayWidth;
 int appHeight = displayHeight;
 
+float topPanelX = appWidth * 0/16;
+float topPanelY = appHeight * 0/24;
+float topPanelWidth = appWidth * 16/16;
+float topPanelHeight = appHeight * 1/24;
+rect(topPanelX, topPanelY, topPanelWidth, topPanelHeight);
+
 float logoX = appWidth * 0.2/16;
 float logoY = appHeight * 0/24;
 float logoWidth = appWidth * 1/16;
@@ -50,17 +56,23 @@ float imageWidth = appWidth * 14/16;
 float imageHeight = appHeight * 6.5/24;
 rect(imageX, imageY, imageWidth, imageHeight);
 
-float addX = appWidth * 13.3/16;
+float addX = appWidth * 13/16;
 float addY = appHeight * 6.5/24;
-float addWidth = appWidth * 1.8/16;
-float addHeight = appHeight * 1.6/24;
+float addWidth = appWidth * 2/16;
+float addHeight = appHeight * 1.5/24;
 rect(addX, addY, addWidth, addHeight);
 
 float titleX = appWidth * 3/16;
-float titleY = appHeight * 6.5/24;
+float titleY = appHeight * 8.5/24;
 float titleWidth = appWidth * 10/16;
 float titleHeight = appHeight * 2/24;
 rect(titleX, titleY, titleWidth, titleHeight);
+
+float textboxX = appWidth * 1/16;
+float textboxY = appHeight * 11/24;
+float textboxWidth = appWidth * 11.2/16;
+float textboxHeight = appHeight * 9/24;
+rect(textboxX, textboxY, textboxWidth, textboxHeight);
 
 float aboutX = appWidth * 1/16;
 float aboutY = appHeight * 11/24;
@@ -80,11 +92,11 @@ float lyricsWidth = appWidth * 10.4/16;
 float lyricsHeight = appHeight * 7/24;
 rect(lyricsX, lyricsY, lyricsWidth, lyricsHeight);
 
-float textboxX = appWidth * 1/16;
-float textboxY = appHeight * 11/24;
-float textboxWidth = appWidth * 11.2/16;
-float textboxHeight = appHeight * 9/24;
-rect(textboxX, textboxY, textboxWidth, textboxHeight);
+float iconBoxX = appWidth * 13/16;
+float iconBoxY = appHeight * 11/24;
+float iconBoxWidth = appWidth * 2/16;
+float iconBoxHeight = appHeight * 9/24;
+rect(iconBoxX, iconBoxY, iconBoxWidth, iconBoxHeight);
 
 float playlistX = appWidth * 13/16;
 float playlistY = appHeight * 11/24;
@@ -122,11 +134,12 @@ float notesWidth = appWidth * 2/16;
 float notesHeight = appHeight * 1.5/24;
 rect(notesX, notesY, notesWidth, notesHeight);
 
-float iconBoxX = appWidth * 13/16;
-float iconBoxY = appHeight * 11/24;
-float iconBoxWidth = appWidth * 2/16;
-float iconBoxHeight = appHeight * 9/24;
-rect(iconBoxX, iconBoxY, iconBoxWidth, iconBoxHeight);
+
+float rectanglearoundtimeX = appWidth * 1/16;
+float rectanglearoundtimeY = appHeight * 20.4/24;
+float rectanglearoundtimeWidth = appWidth * 14.2/16;
+float rectanglearoundtimeHeight = appHeight * 2.5/24;
+rect(rectanglearoundtimeX, rectanglearoundtimeY, rectanglearoundtimeWidth, rectanglearoundtimeHeight);
 
 float previousX = appWidth * 1/16;
 float previousY = appHeight * 20.4/24;
@@ -154,7 +167,7 @@ rect(timeBoxX, timeBoxY, timeBoxWidth, timeBoxHeight);
 
 float timeX = appWidth * 6.3/16;
 float timeY = appHeight * 21.5/24;
-float timeWidth = appWidth * 7.5/16;
+float timeWidth = appWidth * 7.7/16;
 float timeHeight = appHeight * 0.3/24;
 rect(timeX, timeY, timeWidth, timeHeight);
 
@@ -170,32 +183,21 @@ float time2Width = appWidth * 1/16;
 float time2Height = appHeight * 0.5/24;
 rect(time2X, time2Y, time2Width, time2Height);
 
-float rectanglearoundtimeX = appWidth * 1/16;
-float rectanglearoundtimeY = appHeight * 20.4/24;
-float rectanglearoundtimeWidth = appWidth * 14.2/16;
-float rectanglearoundtimeHeight = appHeight * 2.5/24;
-rect(rectanglearoundtimeX, rectanglearoundtimeY, rectanglearoundtimeWidth, rectanglearoundtimeHeight);
 
-float more1X = appWidth * 14.3/16;
+float more1X = appWidth * 14.6/16;
 float more1Y = appHeight * 20.4/24;
 float more1Width = appWidth * 0.5/16;
-float more1Height = appHeight * 0.8/24;
+float more1Height = appHeight * 0.87/24;
 rect(more1X, more1Y, more1Width, more1Height);
 
-float more2X = appWidth * 14.3/16;
+float more2X = appWidth * 14.6/16;
 float more2Y = appHeight * 21.2/24;
 float more2Width = appWidth * 0.5/16;
-float more2Height = appHeight * 0.8/24;
+float more2Height = appHeight * 0.87/24;
 rect(more2X, more2Y, more2Width, more2Height);
 
-float more3X = appWidth * 14.3/16;
+float more3X = appWidth * 14.6/16;
 float more3Y = appHeight * 22/24;
 float more3Width = appWidth * 0.5/16;
-float more3Height = appHeight * 0.8/24;
+float more3Height = appHeight * 0.87/24;
 rect(more3X, more3Y, more3Width, more3Height);
-
-float bigboxX = appWidth * 16/16;
-float bigboxY = appHeight * 24/24 ;
-float bigboxWidth = appWidth * 16/16 ;
-float bigboxHeight = appHeight * 24/24;
-rect(bigboxX, bigboxY, bigboxWidth, bigboxHeight);
