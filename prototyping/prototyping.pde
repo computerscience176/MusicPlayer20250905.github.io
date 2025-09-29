@@ -1,4 +1,4 @@
-fullScreen(displayWidth); //displayWidth //displayHeight
+fullScreen(); //displayWidth //displayHeight
 int appWidth = displayWidth;
 int appHeight = displayHeight;
 
@@ -147,17 +147,25 @@ float previousWidth = appWidth * 1.4/16;
 float previousHeight = appHeight * 2.5/24;
 rect(previousX, previousY, previousWidth, previousHeight);
 
+rect(previousX + previousWidth* 1/4, previousY + previousHeight* 1/4, previousWidth*1/8, previousHeight*1/2);
+triangle(previousX + previousWidth*3/8, previousY + previousHeight*1/2, previousX + previousWidth*3/4, previousY + previousHeight*1/4, previousX + previousWidth*3/4, previousY + previousHeight*3/4);
+
 float playX = appWidth * 2.4/16;
 float playY = appHeight * 20.4/24;
 float playWidth = appWidth * 1.9/16;
 float playHeight = appHeight * 2.5/24;
 rect(playX, playY, playWidth, playHeight);
 
+triangle(playX + playWidth*0.25, playY + playHeight*0.25, playX + playWidth*0.25, playY + playHeight*0.75, playX + playWidth*0.75, playY + playHeight*0.5);
+
 float forwordX = appWidth * 4.3/16;
 float forwordY = appHeight * 20.4/24;
 float forwordWidth = appWidth * 1.4/16;
 float forwordHeight = appHeight * 2.5/24;
 rect(forwordX, forwordY, forwordWidth, forwordHeight);
+
+triangle(forwordX + forwordWidth*1/4, forwordY + forwordHeight*1/4, forwordX + forwordWidth*1.4 forwordY + forwordHeight*3/4, forwordX + forwordWidth*0.75, forwordY + forwordHeight*0.5);
+rect(forwordX + forwordWidth*0.75, forwordY + forwordHeight*0.25, forwordWidth*0.125, forwordHeight*0.5);
 
 float timeBoxX = appWidth * 6/16;
 float timeBoxY = appHeight * 21/24;
@@ -201,3 +209,7 @@ float more3Y = appHeight * 22/24;
 float more3Width = appWidth * 0.5/16;
 float more3Height = appHeight * 0.87/24;
 rect(more3X, more3Y, more3Width, more3Height);
+
+//square(nameX, nameY, nameDimension);
+//line(nameX1, nameY1, nameX2, nameY2);
+//triangle(nameX1, nameY1, nameX2, nameY2, nameX3, nameY3);
