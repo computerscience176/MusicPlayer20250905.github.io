@@ -156,7 +156,7 @@ float playWidth = appWidth * 1.9/16;
 float playHeight = appHeight * 2.5/24;
 rect(playX, playY, playWidth, playHeight);
 
-triangle(playX + playWidth*0.25, playY + playHeight*0.25, playX + playWidth*0.25, playY + playHeight*0.75, playX + playWidth*0.75, playY + playHeight*0.5);
+triangle(playX + playWidth*1/4, playY + playHeight*1/4, playX + playWidth*1/4, playY + playHeight*3/4, playX + playWidth*3/4, playY + playHeight*1/2);
 
 float forwordX = appWidth * 4.3/16;
 float forwordY = appHeight * 20.4/24;
@@ -164,8 +164,8 @@ float forwordWidth = appWidth * 1.4/16;
 float forwordHeight = appHeight * 2.5/24;
 rect(forwordX, forwordY, forwordWidth, forwordHeight);
 
-triangle(forwordX + forwordWidth*1/4, forwordY + forwordHeight*1/4, forwordX + forwordWidth*1.4 forwordY + forwordHeight*3/4, forwordX + forwordWidth*0.75, forwordY + forwordHeight*0.5);
-rect(forwordX + forwordWidth*0.75, forwordY + forwordHeight*0.25, forwordWidth*0.125, forwordHeight*0.5);
+triangle(forwordX + forwordWidth* 1/4, forwordY + forwordHeight*1/4, forwordX + forwordWidth* 1/4, forwordY + forwordHeight*3/4, forwordX + forwordWidth*5/8, forwordY + forwordHeight*1/2);
+rect(forwordX + forwordWidth*5/8, forwordY + forwordHeight*1/4, forwordWidth*1/8, forwordHeight*1/2);
 
 float timeBoxX = appWidth * 6/16;
 float timeBoxY = appHeight * 21/24;
