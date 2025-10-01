@@ -1,4 +1,5 @@
 /* DIVS: 2D Rectangles
 */
 //
-fullScreen();
+fullScreen();//displayWidth //displayHeight
+println(displayWidth,displayHeight);
