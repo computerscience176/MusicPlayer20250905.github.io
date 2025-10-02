@@ -14,7 +14,7 @@ float logoWidth = appWidth * 1/16;
 float logoHeight = appHeight * 1/24;
 rect(logoX, logoY, logoWidth, logoHeight);
 
-circle(logoX + logoWidth* 1/2, logoY + logoHeight* 1/2, 1/16);
+//circle(logoX + logoWidth / 2, logoY + logoHeight / 2, min(logoWidth, logoHeight));
 
 float websiteNameX = appWidth * 1.2/16;
 float websiteNameY = appHeight * 0/24;
