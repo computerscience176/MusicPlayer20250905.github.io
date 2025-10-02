@@ -14,6 +14,8 @@ float logoWidth = appWidth * 1/16;
 float logoHeight = appHeight * 1/24;
 rect(logoX, logoY, logoWidth, logoHeight);
 
+circle(logoX + logoWidth* 1/2, logoY + logoHeight* 1/2, 1/16);
+
 float websiteNameX = appWidth * 1.2/16;
 float websiteNameY = appHeight * 0/24;
 float websiteNameWidth = appWidth * 4.8/16;
@@ -164,7 +166,7 @@ float forwordWidth = appWidth * 1.4/16;
 float forwordHeight = appHeight * 2.5/24;
 rect(forwordX, forwordY, forwordWidth, forwordHeight);
 
-triangle(forwordX + forwordWidth* 1/4, forwordY + forwordHeight*1/4, forwordX + forwordWidth* 1/4, forwordY + forwordHeight*3/4, forwordX + forwordWidth*5/8, forwordY + forwordHeight*1/2);
+triangle(forwordX + forwordWidth * 1/4, forwordY + forwordHeight*1/4, forwordX + forwordWidth* 1/4, forwordY + forwordHeight*3/4, forwordX + forwordWidth*5/8, forwordY + forwordHeight*1/2);
 rect(forwordX + forwordWidth*5/8, forwordY + forwordHeight*1/4, forwordWidth*1/8, forwordHeight*1/2);
 
 float timeBoxX = appWidth * 6/16;
@@ -209,6 +211,7 @@ float more3Y = appHeight * 22/24;
 float more3Width = appWidth * 0.5/16;
 float more3Height = appHeight * 0.87/24;
 rect(more3X, more3Y, more3Width, more3Height);
+
 
 //square(nameX, nameY, nameDimension);
 //line(nameX1, nameY1, nameX2, nameY2);
