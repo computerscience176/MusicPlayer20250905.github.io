@@ -52,9 +52,10 @@ float threeWidth = appWidth * 1.5/16;
 float threeHeight = appHeight * 1/24;
 rect(threeX, threeY, threeWidth, threeHeight);
 
-rect(threeX + threeWidth* 1/4, threeY + threeHeight* 5.5/8, threeWidth*1/2, threeHeight* 1.5/8);
-rect(threeX + threeWidth* 1/4, threeY + threeHeight* 1.5/8, threeWidth*1/2, threeHeight*1.5/8);
-rect(threeX + threeWidth* 1/4, threeY + threeHeight* 3.5/8, threeWidth*1/2, threeHeight*1.5/8);
+rect(threeX + threeWidth* 1/4, threeY + threeHeight* 1/8, threeWidth*1/2, threeHeight*1.5/8);
+rect(threeX + threeWidth* 1/4, threeY + threeHeight* 2.9/8, threeWidth*1/2, threeHeight*1.5/8);
+rect(threeX + threeWidth* 1/4, threeY + threeHeight* 4.9/8, threeWidth*1/2, threeHeight*1.5/8);
+
 
 float imageX = appWidth * 1/16;
 float imageY = appHeight * 1.5/24;
