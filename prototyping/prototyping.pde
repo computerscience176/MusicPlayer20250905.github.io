@@ -69,6 +69,10 @@ float addWidth = appWidth * 2/16;
 float addHeight = appHeight * 1.5/24;
 rect(addX, addY, addWidth, addHeight);
 
+rect(addX + addWidth* 1/4, addY + addHeight* 3/8, addWidth*1/2, addHeight*1/4);
+rect(addX + addWidth* 3/8, addY + addHeight* 1/4, addWidth*1/4, addHeight*1/2);
+
+
 float titleX = appWidth * 3/16;
 float titleY = appHeight * 8.5/24;
 float titleWidth = appWidth * 10/16;
@@ -116,6 +120,8 @@ float volumeY = appHeight * 12.5/24;
 float volumeWidth = appWidth * 2/16;
 float volumeHeight = appHeight * 1.5/24;
 rect(volumeX, volumeY, volumeWidth, volumeHeight);
+
+
 
 float arabicX = appWidth * 13/16;
 float arabicY = appHeight * 14/24;
@@ -204,6 +210,9 @@ float more1Y = appHeight * 20.4/24;
 float more1Width = appWidth * 0.5/16;
 float more1Height = appHeight * 0.87/24;
 rect(more1X, more1Y, more1Width, more1Height);
+
+circle(more1X + more1Width* 1/2, more1Y + more1Height* 1/2, diameter ); 
+
 
 float more2X = appWidth * 14.6/16;
 float more2Y = appHeight * 21.2/24;
