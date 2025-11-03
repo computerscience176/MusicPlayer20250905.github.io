@@ -13,8 +13,9 @@ float logoY = appHeight * 0/24;
 float logoWidth = appWidth * 1/16;
 float logoHeight = appHeight * 1/24;
 rect(logoX, logoY, logoWidth, logoHeight);
+circle(logoX + logoWidth / 2, logoY + logoHeight / 2, min(logoWidth, logoHeight));
 
-//circle(logoX + logoWidth / 2, logoY + logoHeight / 2, min(logoWidth, logoHeight));
+circle(logoX + logoWidth / 2, logoY + logoHeight / 2, min(logoWidth, logoHeight));
 
 float websiteNameX = appWidth * 1.2/16;
 float websiteNameY = appHeight * 0/24;
@@ -129,6 +130,7 @@ float arabicWidth = appWidth * 2/16;
 float arabicHeight = appHeight * 1.5/24;
 rect(arabicX, arabicY, arabicWidth, arabicHeight);
 
+
 float englishX = appWidth * 13/16;
 float englishY = appHeight * 15.5/24;
 float englishWidth = appWidth * 2/16;
@@ -211,8 +213,6 @@ float more1Width = appWidth * 0.5/16;
 float more1Height = appHeight * 0.87/24;
 rect(more1X, more1Y, more1Width, more1Height);
 
-circle(more1X + more1Width* 1/2, more1Y + more1Height* 1/2, diameter ); 
-
 
 float more2X = appWidth * 14.6/16;
 float more2Y = appHeight * 21.2/24;
@@ -225,6 +225,10 @@ float more3Y = appHeight * 22/24;
 float more3Width = appWidth * 0.5/16;
 float more3Height = appHeight * 0.87/24;
 rect(more3X, more3Y, more3Width, more3Height);
+//triangle(moreX + moreWidth*1/4, moreY + moreHeight*1/4, moreX + moreWidth*1/4, moreY + moreHeight*3/4, moreX + moreWidth*1/2, moreY + moreHeight*1/2);
+//Fast forward that appears when you click more.
+//triangle(moreX + moreWidth*1/2, moreY + moreHeight*1/4, moreX + moreWidth*1/2, moreY + moreHeight*3/4, moreX + moreWidth*3/4, moreY + moreHeight*1/2);
+
 
 
 //square(nameX, nameY, nameDimension);
