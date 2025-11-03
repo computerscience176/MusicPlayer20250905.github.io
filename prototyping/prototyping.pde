@@ -122,14 +122,11 @@ float volumeWidth = appWidth * 2/16;
 float volumeHeight = appHeight * 1.5/24;
 rect(volumeX, volumeY, volumeWidth, volumeHeight);
 
-
-
 float arabicX = appWidth * 13/16;
 float arabicY = appHeight * 14/24;
 float arabicWidth = appWidth * 2/16;
 float arabicHeight = appHeight * 1.5/24;
 rect(arabicX, arabicY, arabicWidth, arabicHeight);
-
 
 float englishX = appWidth * 13/16;
 float englishY = appHeight * 15.5/24;
