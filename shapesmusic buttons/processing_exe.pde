@@ -138,14 +138,6 @@ float more3CircleX = more3X + more3Width / 2; // Center X of the circle
 float more3CircleY = more3Y + more3Height / 2; // Center Y of the circle
 float more3CircleDiameter = min(more3Width, more3Height) * 0.6; // Diameter of the circle
 ellipse(more3CircleX, more3CircleY, more3CircleDiameter, more3CircleDiameter);
-float addX = appWidth * 13/16;
-float addY = appHeight * 6.5/24;
-float addWidth = appWidth * 2/16;
-float addHeight = appHeight * 1.5/24;
-rect(addX, addY, addWidth, addHeight);
-
-rect(addX + addWidth* 1/4, addY + addHeight* 3/8, addWidth*1/2, addHeight*1/4);
-rect(addX + addWidth* 3/8, addY + addHeight* 1/4, addWidth*1/4, addHeight*1/2);
 
 float imageX = appWidth * 1/16;float threeX = appWidth * 14.6/16;
 float threeY = appHeight * 0/24;
@@ -156,3 +148,42 @@ rect(threeX, threeY, threeWidth, threeHeight);
 rect(threeX + threeWidth* 1/4, threeY + threeHeight* 1/8, threeWidth*1/2, threeHeight*1.5/8);
 rect(threeX + threeWidth* 1/4, threeY + threeHeight* 2.9/8, threeWidth*1/2, threeHeight*1.5/8);
 rect(threeX + threeWidth* 1/4, threeY + threeHeight* 4.9/8, threeWidth*1/2, threeHeight*1.5/8);
+
+float addX = appWidth * 13/16;
+float addY = appHeight * 6.5/24;
+float addWidth = appWidth * 2/16;
+float addHeight = appHeight * 1.5/24;
+rect(addX, addY, addWidth, addHeight);
+
+// Padding (1/4 on all sides)
+float padX = addWidth / 4;
+float padY = addHeight / 4;
+
+// Coordinates for a plus as a single shape
+float left = addX + padX;
+float right = addX + addWidth - padX;
+float top = addY + padY;
+float bottom = addY + addHeight - padY;
+float centerX = addX + addWidth / 2;
+float centerY = addY + addHeight / 2;
+
+// Half thickness of the bars
+float barWidth = addWidth / 4;
+float barHeight = addHeight / 4;
+
+beginShape();
+// Top of vertical bar
+vertex(centerX - barWidth/2, top);
+// Bottom of vertical bar
+vertex(centerX - barWidth/2, centerY - barHeight/2);
+vertex(left, centerY - barHeight/2);
+vertex(left, centerY + barHeight/2);
+vertex(centerX - barWidth/2, centerY + barHeight/2);
+vertex(centerX - barWidth/2, bottom);
+vertex(centerX + barWidth/2, bottom);
+vertex(centerX + barWidth/2, centerY + barHeight/2);
+vertex(right, centerY + barHeight/2);
+vertex(right, centerY - barHeight/2);
+vertex(centerX + barWidth/2, centerY - barHeight/2);
+vertex(centerX + barWidth/2, top);
+endShape(CLOSE);
