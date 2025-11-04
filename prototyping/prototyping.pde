@@ -13,9 +13,6 @@ float logoY = appHeight * 0/24;
 float logoWidth = appWidth * 1/16;
 float logoHeight = appHeight * 1/24;
 rect(logoX, logoY, logoWidth, logoHeight);
-circle(logoX + logoWidth / 2, logoY + logoHeight / 2, min(logoWidth, logoHeight));
-
-circle(logoX + logoWidth / 2, logoY + logoHeight / 2, min(logoWidth, logoHeight));
 
 float websiteNameX = appWidth * 1.2/16;
 float websiteNameY = appHeight * 0/24;
@@ -69,9 +66,6 @@ float addY = appHeight * 6.5/24;
 float addWidth = appWidth * 2/16;
 float addHeight = appHeight * 1.5/24;
 rect(addX, addY, addWidth, addHeight);
-
-rect(addX + addWidth* 1/4, addY + addHeight* 3/8, addWidth*1/2, addHeight*1/4);
-rect(addX + addWidth* 3/8, addY + addHeight* 1/4, addWidth*1/4, addHeight*1/2);
 
 
 float titleX = appWidth * 3/16;
