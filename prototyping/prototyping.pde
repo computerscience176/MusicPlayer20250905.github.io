@@ -47,7 +47,9 @@ float accountWidth = appWidth * 2/16;
 float accountHeight = appHeight * 1/24;
 rect(accountX, accountY, accountWidth, accountHeight);
 
-float threeX = appWidth * 14.6/16;
+
+
+float imageX = appWidth * 1/16;float threeX = appWidth * 14.6/16;
 float threeY = appHeight * 0/24;
 float threeWidth = appWidth * 1.5/16;
 float threeHeight = appHeight * 1/24;
@@ -57,8 +59,6 @@ rect(threeX + threeWidth* 1/4, threeY + threeHeight* 1/8, threeWidth*1/2, threeH
 rect(threeX + threeWidth* 1/4, threeY + threeHeight* 2.9/8, threeWidth*1/2, threeHeight*1.5/8);
 rect(threeX + threeWidth* 1/4, threeY + threeHeight* 4.9/8, threeWidth*1/2, threeHeight*1.5/8);
 
-
-float imageX = appWidth * 1/16;
 float imageY = appHeight * 1.5/24;
 float imageWidth = appWidth * 14/16;
 float imageHeight = appHeight * 6.5/24;
