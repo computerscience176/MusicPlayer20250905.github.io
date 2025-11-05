@@ -1,12 +1,12 @@
 /* DIVs 2D Rectangles
-- Step One: naming the rectangles by referencing the variables
-- Writing a computer program backwards from an object
-
-Future Steps
-- Step Two: developing the Display CANVAS & the Ternary Operator
-- Step Three: populating variables (local v global and type)
-- turning on and off the prototype
-*/
+ - Step One: naming the rectangles by referencing the variables
+ - Writing a computer program backwards from an object
+ 
+ Future Steps
+ - Step Two: developing the Display CANVAS & the Ternary Operator
+ - Step Three: populating variables (local v global and type)
+ - turning on and off the prototype
+ */
 
 // Display CANVAS
 fullScreen(); // displayWidth // displayHeight
@@ -139,7 +139,8 @@ float more3CircleY = more3Y + more3Height / 2; // Center Y of the circle
 float more3CircleDiameter = min(more3Width, more3Height) * 0.6; // Diameter of the circle
 ellipse(more3CircleX, more3CircleY, more3CircleDiameter, more3CircleDiameter);
 
-float imageX = appWidth * 1/16;float threeX = appWidth * 14.6/16;
+float imageX = appWidth * 1/16;
+float threeX = appWidth * 14.6/16;
 float threeY = appHeight * 0/24;
 float threeWidth = appWidth * 1.5/16;
 float threeHeight = appHeight * 1/24;
@@ -187,3 +188,26 @@ vertex(right, centerY - barHeight/2);
 vertex(centerX + barWidth/2, centerY - barHeight/2);
 vertex(centerX + barWidth/2, top);
 endShape(CLOSE);
+
+/* --- BOOKMARK BUTTON ---
+float bookmarkX = appWidth * 13/16;   // adjust to fit next to other buttons
+float bookmarkY = appHeight * 6.5/24;
+float bookmarkW = appWidth * 2/16;
+float bookmarkH = appHeight * 1.5/24;
+
+// Background rectangle
+rect(bookmarkX, bookmarkY, bookmarkW, bookmarkH);
+
+// Padding
+float bookmarkPadX = bookmarkW / 4;
+float bookmarkPadY = bookmarkH / 4;
+
+// Inner bookmark shape
+beginShape();
+vertex(bookmarkX + bookmarkPadX, bookmarkY + bookmarkPadY); // top-left
+vertex(bookmarkX + bookmarkW - bookmarkPadX, bookmarkY + bookmarkPadY); // top-right
+vertex(bookmarkX + bookmarkW - bookmarkPadX, bookmarkY + bookmarkH - bookmarkPadY); // bottom-right
+vertex(bookmarkX + bookmarkW/2, bookmarkY + bookmarkH - bookmarkPadY*0.3); // notch tip
+vertex(bookmarkX + bookmarkPadX, bookmarkY + bookmarkH - bookmarkPadY); // bottom-left
+endShape(CLOSE);
+*/
