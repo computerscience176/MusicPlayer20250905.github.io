@@ -1,14 +1,4 @@
-/* DIVs 2D Rectangles
- - Step One: naming the rectangles by referencing the variables
- - Writing a computer program backwards from an object
- 
- Future Steps
- - Step Two: developing the Display CANVAS & the Ternary Operator
- - Step Three: populating variables (local v global and type)
- - turning on and off the prototype
- */
 
-// Display CANVAS
 fullScreen(); // displayWidth // displayHeight
 int appWidth = displayWidth;
 int appHeight = displayHeight;
@@ -190,24 +180,75 @@ vertex(centerX + barWidth/2, top);
 endShape(CLOSE);
 
 /* --- BOOKMARK BUTTON ---
-float bookmarkX = appWidth * 13/16;   // adjust to fit next to other buttons
-float bookmarkY = appHeight * 6.5/24;
-float bookmarkW = appWidth * 2/16;
-float bookmarkH = appHeight * 1.5/24;
+ float bookmarkX = appWidth * 13/16;   // adjust to fit next to other buttons
+ float bookmarkY = appHeight * 6.5/24;
+ float bookmarkW = appWidth * 2/16;
+ float bookmarkH = appHeight * 1.5/24;
+ 
+ // Background rectangle
+ rect(bookmarkX, bookmarkY, bookmarkW, bookmarkH);
+ 
+ // Padding
+ float bookmarkPadX = bookmarkW / 4;
+ float bookmarkPadY = bookmarkH / 4;
+ 
+ // Inner bookmark shape
+ beginShape();
+ vertex(bookmarkX + bookmarkPadX, bookmarkY + bookmarkPadY); // top-left
+ vertex(bookmarkX + bookmarkW - bookmarkPadX, bookmarkY + bookmarkPadY); // top-right
+ vertex(bookmarkX + bookmarkW - bookmarkPadX, bookmarkY + bookmarkH - bookmarkPadY); // bottom-right
+ vertex(bookmarkX + bookmarkW/2, bookmarkY + bookmarkH - bookmarkPadY*0.3); // notch tip
+ vertex(bookmarkX + bookmarkPadX, bookmarkY + bookmarkH - bookmarkPadY); // bottom-left
+ endShape(CLOSE);
+ */
+float searchIconX = appWidth * 6 / 16;
+float searchIconY = appHeight * 0 / 24;
+float searchIconWidth = appWidth * 0.5 / 16;
+float searchIconHeight = appHeight * 1 / 24;
 
-// Background rectangle
-rect(bookmarkX, bookmarkY, bookmarkW, bookmarkH);
+// Draw the rectangle
+rect(searchIconX, searchIconY, searchIconWidth, searchIconHeight);
 
-// Padding
-float bookmarkPadX = bookmarkW / 4;
-float bookmarkPadY = bookmarkH / 4;
+// Padding (1/4 of the rectangle dimensions)
+float paddingX = searchIconWidth / 4;
+float paddingY = searchIconHeight / 4;
 
-// Inner bookmark shape
-beginShape();
-vertex(bookmarkX + bookmarkPadX, bookmarkY + bookmarkPadY); // top-left
-vertex(bookmarkX + bookmarkW - bookmarkPadX, bookmarkY + bookmarkPadY); // top-right
-vertex(bookmarkX + bookmarkW - bookmarkPadX, bookmarkY + bookmarkH - bookmarkPadY); // bottom-right
-vertex(bookmarkX + bookmarkW/2, bookmarkY + bookmarkH - bookmarkPadY*0.3); // notch tip
-vertex(bookmarkX + bookmarkPadX, bookmarkY + bookmarkH - bookmarkPadY); // bottom-left
-endShape(CLOSE);
-*/
+// Circle (centered within the padded area)
+float circleDiameter = min(searchIconWidth - 2 * paddingX, searchIconHeight - 2 * paddingY) * 0.6;
+float circleX = searchIconX + searchIconWidth / 2;
+float circleY = searchIconY + searchIconHeight / 2;
+
+// Line (connected to the circle, within the padded area)
+float lineLength = circleDiameter * 0.5;
+float lineStartX = circleX + circleDiameter / 2;
+float lineStartY = circleY + circleDiameter / 2;
+float lineEndX = lineStartX + lineLength * 0.7;
+float lineEndY = lineStartY + lineLength * 0.7;
+
+// Draw the search icon
+ellipse(circleX, circleY, circleDiameter, circleDiameter);
+line(lineStartX, lineStartY, lineEndX, lineEndY);
+
+float searchX = appWidth * 6.8 / 16;
+float searchY = appHeight * 0 / 24;
+float searchWidth = appWidth * 4 / 16;
+float searchHeight = appHeight * 1 / 24;
+
+// Draw the outer search rectangle
+rect(searchX, searchY, searchWidth, searchHeight);
+
+// Padding (1/4 of the search rectangle dimensions)
+float searchpaddingX = searchWidth / 8;
+float searchpaddingY = searchHeight / 4;
+
+// Adjusted dimensions for the inner rounded rectangle
+float innerX = searchX + searchpaddingX;
+float innerY = searchY + searchpaddingY;
+float innerWidth = searchWidth - 2 * searchpaddingX;
+float innerHeight = searchHeight - 2 * searchpaddingY;
+
+// Corner radius for rounded edges
+float cornerRadius = innerHeight / 2;
+
+// Draw the inner rounded rectangle
+rect(innerX, innerY, innerWidth, innerHeight, cornerRadius);
