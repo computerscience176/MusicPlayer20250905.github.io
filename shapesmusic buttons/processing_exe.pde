@@ -201,6 +201,7 @@ endShape(CLOSE);
  vertex(bookmarkX + bookmarkPadX, bookmarkY + bookmarkH - bookmarkPadY); // bottom-left
  endShape(CLOSE);
  */
+ 
 float searchIconX = appWidth * 6 / 16;
 float searchIconY = appHeight * 0 / 24;
 float searchIconWidth = appWidth * 0.5 / 16;
@@ -252,3 +253,19 @@ float cornerRadius = innerHeight / 2;
 
 // Draw the inner rounded rectangle
 rect(innerX, innerY, innerWidth, innerHeight, cornerRadius);
+
+float playlistX = appWidth * 13/16;
+float playlistY = appHeight * 11/24;
+float playlistWidth = appWidth * 2/16;
+float playlistHeight = appHeight * 1.5/24;
+
+// Draw the playlist rectangle
+rect(playlistX, playlistY, playlistWidth, playlistHeight);
+
+// Draw a nice centered circle inside
+float playlistpadding = min(playlistWidth, playlistHeight) * 0.25;  // 25% padding all around
+float playlistcircleDiameter = min(playlistWidth, playlistHeight) - 2 * playlistpadding;
+float playlistcircleX = playlistX + playlistWidth / 2;
+float playlistcircleY = playlistY + playlistHeight / 2;
+
+ellipse(playlistcircleX, playlistcircleY, playlistcircleDiameter, playlistcircleDiameter);
