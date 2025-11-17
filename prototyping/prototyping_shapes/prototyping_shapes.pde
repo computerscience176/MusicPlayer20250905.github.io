@@ -263,7 +263,7 @@ float playlistHeight = appHeight * 1.5/24;
 rect(playlistX, playlistY, playlistWidth, playlistHeight);
 
 // Draw a nice centered circle inside
-float playlistpadding = min(playlistWidth, playlistHeight) * 0.25;  // 25% padding all around
+float playlistpadding = min(playlistWidth, playlistHeight) * 1/4;  // 25% padding all around
 float playlistcircleDiameter = min(playlistWidth, playlistHeight) - 2 * playlistpadding;
 float playlistcircleX = playlistX + playlistWidth / 2;
 float playlistcircleY = playlistY + playlistHeight / 2;
