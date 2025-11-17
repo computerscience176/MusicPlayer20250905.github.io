@@ -269,3 +269,35 @@ float playlistcircleX = playlistX + playlistWidth / 2;
 float playlistcircleY = playlistY + playlistHeight / 2;
 
 ellipse(playlistcircleX, playlistcircleY, playlistcircleDiameter, playlistcircleDiameter);
+
+// --- CUSTOMIZE BUTTON (8-Point Star Shape) ---
+float customizeX = appWidth * 13/16;
+float customizeY = appHeight * 17/24;
+float customizeWidth = appWidth * 2/16;
+float customizeHeight = appHeight * 1.5/24;
+
+// Draw rectangle background
+rect(customizeX, customizeY, customizeWidth, customizeHeight);
+
+// Padding
+float customizepadX = customizeWidth / 4;
+float customizepadY = customizeHeight / 4;
+
+// Center of the rectangle
+float customizecenterX = customizeX + customizeWidth / 2;
+float customizecenterY = customizeY + customizeHeight / 2;
+
+// Radii for star points
+float outerRadius = (customizeHeight - 2*customizepadY) / 2;
+float innerRadius = outerRadius / 2;
+
+// Draw 8-point star using beginShape()
+beginShape();
+for (int i = 0; i < 16; i++) { // 8 points = 16 vertices (outer + inner)
+  float radius = (i % 2 == 0) ? outerRadius : innerRadius;
+  float angle = PI / 8 * i; // 360° / 16 vertices
+  float x = customizecenterX + cos(angle) * radius;
+  float y = customizecenterY + sin(angle) * radius;
+  vertex(x, y);
+}
+endShape(CLOSE);
