@@ -129,7 +129,6 @@ float more3CircleY = more3Y + more3Height / 2; // Center Y of the circle
 float more3CircleDiameter = min(more3Width, more3Height) * 0.6; // Diameter of the circle
 ellipse(more3CircleX, more3CircleY, more3CircleDiameter, more3CircleDiameter);
 
-float imageX = appWidth * 1/16;
 float threeX = appWidth * 14.6/16;
 float threeY = appHeight * 0/24;
 float threeWidth = appWidth * 1.5/16;
@@ -147,14 +146,14 @@ float addHeight = appHeight * 1.5/24;
 rect(addX, addY, addWidth, addHeight);
 
 // Padding (1/4 on all sides)
-float padX = addWidth / 4;
-float padY = addHeight / 4;
+float addpadX = addWidth / 4;
+float addpadY = addHeight / 4;
 
 // Coordinates for a plus as a single shape
-float left = addX + padX;
-float right = addX + addWidth - padX;
-float top = addY + padY;
-float bottom = addY + addHeight - padY;
+float left = addX + addpadX;
+float right = addX + addWidth - addpadX;
+float top = addY + addpadY;
+float bottom = addY + addHeight - addpadY;
 float centerX = addX + addWidth / 2;
 float centerY = addY + addHeight / 2;
 
@@ -280,22 +279,22 @@ float customizeHeight = appHeight * 1.5/24;
 rect(customizeX, customizeY, customizeWidth, customizeHeight);
 
 // Padding
-float customizepadX = customizeWidth / 4;
-float customizepadY = customizeHeight / 4;
+float customizepadX = customizeWidth * 1/4;
+float customizepadY = customizeHeight * 1/4;
 
 // Center of the rectangle
-float customizecenterX = customizeX + customizeWidth / 2;
-float customizecenterY = customizeY + customizeHeight / 2;
+float customizecenterX = customizeX + customizeWidth * 1/2;
+float customizecenterY = customizeY + customizeHeight * 1/2;
 
 // Radii for star points
-float outerRadius = (customizeHeight - 2*customizepadY) / 2;
-float innerRadius = outerRadius / 2;
+float outerRadius = (customizeHeight - 2*customizepadY) /2;
+float innerRadius = outerRadius /2;
 
 // Draw 8-point star using beginShape()
 beginShape();
-for (int i = 0; i < 16; i++) { // 8 points = 16 vertices (outer + inner)
+for (int i = 0; i < 14; i++) { // 7 points = 14 vertices (outer + inner)
   float radius = (i % 2 == 0) ? outerRadius : innerRadius;
-  float angle = PI / 8 * i; // 360° / 16 vertices
+  float angle = PI / 7 * i; // 360° / 14 vertices
   float x = customizecenterX + cos(angle) * radius;
   float y = customizecenterY + sin(angle) * radius;
   vertex(x, y);
