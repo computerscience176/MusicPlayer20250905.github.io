@@ -1,4 +1,3 @@
-
 fullScreen(); // displayWidth // displayHeight
 int appWidth = displayWidth;
 int appHeight = displayHeight;
@@ -94,19 +93,19 @@ float padding = volumeWidth * 0.25;
 
 // Horizontal Line (Volume Bar)
 float lineX1 = volumeX + padding; // Start of the line
-float lineY = volumeY + volumeHeight / 2; // Centered vertically
+float noteslineY = volumeY + volumeHeight / 2; // Centered vertically
 float lineX2 = volumeX + volumeWidth - padding; // End of the line
-line(lineX1, lineY, lineX2, lineY);
+line(lineX1, noteslineY, lineX2, noteslineY);
 
 // Minus Sign (-)
 float minusX = lineX1 - padding * 0.5; // Position to the left of the line
-float minusY = lineY;
+float minusY = noteslineY;
 float minusSize = padding * 0.5; // Size of the minus sign
 line(minusX - minusSize / 2, minusY, minusX + minusSize / 2, minusY); // Horizontal line for minus
 
 // Plus Sign (+)
 float plusX = lineX2 + padding * 0.5; // Position to the right of the line
-float plusY = lineY;
+float plusY = noteslineY;
 float plusSize = padding * 0.5; // Size of the plus sign
 line(plusX - plusSize / 2, plusY, plusX + plusSize / 2, plusY); // Horizontal line for plus
 line(plusX, plusY - plusSize / 2, plusX, plusY + plusSize / 2); // Vertical line for plus
@@ -300,3 +299,63 @@ for (int i = 0; i < 14; i++) { // 7 points = 14 vertices (outer + inner)
   vertex(x, y);
 }
 endShape(CLOSE);
+
+/*float speedX = appWidth * 10/16;
+float speedY = appHeight * 20.4/24;
+float speedWidth = appWidth * 1.5/16;
+float speedHeight = appHeight * 2/24;
+rect(speedX, speedY, speedWidth, speedHeight);
+
+// Left triangle
+triangle(
+  speedX + speedWidth*1/4, speedY + speedHeight*1/4,
+  speedX + speedWidth*1/4, speedY + speedHeight*3/4,
+  speedX + speedWidth*1/2, speedY + speedHeight/2
+);
+
+// Right triangle
+triangle(
+  speedX + speedWidth*1/2, speedY + speedHeight*1/4,
+  speedX + speedWidth*1/2, speedY + speedHeight*3/4,
+  speedX + speedWidth*3/4, speedY + speedHeight/2
+);
+the numbers have to be adjusted because it pops out when you press the more button
+*/
+
+// --- Notes Button ---
+float notesX = appWidth * 13/16;
+float notesY = appHeight * 18.5/24;
+float notesWidth = appWidth * 2/16;
+float notesHeight = appHeight * 1.5/24;
+
+// Outer button rectangle
+rect(notesX, notesY, notesWidth, notesHeight); 
+
+// Padding (1/4)
+float padX = notesWidth * 1/4;
+float padY = notesHeight * 1/4;
+
+// Inner rectangle (paper)
+float notesInnerX = notesX + padX;
+float notesInnerY = notesY + padY;
+float notesInnerW = notesWidth - padX * 2;
+float notesInnerH = notesHeight - padY * 2;
+rect(notesInnerX, notesInnerY, notesInnerW, notesInnerH, 5);
+
+// Folded corner triangle (top-right)
+float triSize = notesInnerW * 1/8; // size of folded corner
+triangle(
+  notesInnerX + notesInnerW, notesInnerY,                     // top-right corner (base right)
+  notesInnerX + notesInnerW - triSize, notesInnerY,           // base left
+  notesInnerX + notesInnerW, notesInnerY + triSize            // tip pointing inward
+);
+
+// Lines inside inner rectangle (text)
+int numLines = 3;                                // number of lines
+float linePad = notesInnerH * 0.24;               // vertical spacing between lines
+for (int i = 1; i <= numLines; i++) {
+  float lineY = notesInnerY + i * linePad;       // y position of each line
+  float noteslineStartX = notesInnerX + notesInnerW * 1/4;   // 1/4 in from left
+  float noteslineEndX = notesInnerX + notesInnerW * 3/4;     // 3/4 across width
+  line(noteslineStartX, lineY, noteslineEndX, lineY);     // draw the line
+}
