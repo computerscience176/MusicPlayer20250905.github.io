@@ -4,4 +4,4 @@
 //
 //Display
 fullScreen(); //landscape
-size();//portrait
+//size(900,400);//portrait my image is a landscape
