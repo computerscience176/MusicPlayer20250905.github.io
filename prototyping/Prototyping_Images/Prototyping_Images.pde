@@ -27,7 +27,8 @@ String imagePathway1 = upArrow +folder +aliimran + fileExtensionJPG;
 PImage image1 = loadImage(imagePathway1);
 int imageWidth1= 873;
 int imageHeight1= 760;
-//
+//Aspect Ratio
+//float image1AspectRation_GreaterOne= ()?:;
 //
 //DIV
 rect(imageX, imageY, imageWidth, imageHeight);
