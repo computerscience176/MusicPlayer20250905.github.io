@@ -10,10 +10,10 @@ int appHeight = displayHeight; //the height
 println("Display VARS:", "appWidth:" + appWidth,"appHeight:"+ appHeight, "\n\tFullScreen: displayWidth:"+displayWidth, "displayHeight:"+displayHeight, "\n\t\t Size: width:"+width, "height:"+height);// glows green because its a perfect string \n makes new line \t tab
 //
 //Population
-float imageX = appWidth * 1/16;
-float imageY = appHeight * 1.5/24;
-float imageWidth = appWidth * 14/16;
-float imageHeight = appHeight * 6.5/24;
+float image1X = appWidth * 1/16;
+float image1Y = appHeight * 1.5/24;
+float image1Width = appWidth * 14/16;
+float image1Height = appHeight * 6.5/24;
 //
 //Image Aspect Ratio Vars & Algorithum 
 //Diretory or Pathway, Concatenation inciatetion string varaible spell correctly declaration ;
@@ -28,9 +28,9 @@ PImage image1 = loadImage(imagePathway1);
 int imageWidth1= 873;
 int imageHeight1= 760;
 //Aspect Ratio
-//float image1AspectRation_GreaterOne= ()?:;
+//float image1AspectRation_GreaterOne= ()?:;//Ternary Operator
 //
 //DIV
-rect(imageX, imageY, imageWidth, imageHeight);
+rect(image1X, image1Y, image1Width, image1Height);
 //
-image(image1,imageX, imageY, imageWidth, imageHeight);
+image(image1,image1X, image1Y, image1Width, image1Height);
