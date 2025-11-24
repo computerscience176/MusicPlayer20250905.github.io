@@ -28,7 +28,8 @@ PImage image1 = loadImage(imagePathway1);
 int imageWidth1= 873;
 int imageHeight1= 760;
 //Aspect Ratio
-//float image1AspectRation_GreaterOne= ()?:;//Ternary Operator
+float image1AspectRatio_GreaterOne = ( imageWidth1 >= imageHeight1 )? imageWidth1/imageHeight1 : imageHeight1/imageWidth1;//Ternary Operator
+
 //
 //DIV
 rect(image1X, image1Y, image1Width, image1Height);
