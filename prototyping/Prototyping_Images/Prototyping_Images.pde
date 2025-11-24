@@ -29,7 +29,7 @@ int imageWidth1= 873;
 int imageHeight1= 760;
 //Aspect Ratio
 float image1AspectRatio_GreaterOne = ( imageWidth1 >= imageHeight1 )? imageWidth1/imageHeight1 : imageHeight1/imageWidth1;//Ternary Operator
-
+println(image1AspectRatio_GreaterOne);
 //
 //DIV
 rect(image1X, image1Y, image1Width, image1Height);
