@@ -10,10 +10,10 @@ int appHeight = displayHeight; //the height
 println("Display VARS:", "appWidth:" + appWidth,"appHeight:"+ appHeight, "\n\tFullScreen: displayWidth:"+displayWidth, "displayHeight:"+displayHeight, "\n\t\t Size: width:"+width, "height:"+height);// glows green because its a perfect string \n makes new line \t tab
 //
 //Population
-float image1X = appWidth * 1/16;
-float image1Y = appHeight * 1.5/24;
-float image1Width = appWidth * 14/16;
-float image1Height = appHeight * 6.5/24;
+float imageDIVX = appWidth * 1/16;
+float imageDIVY = appHeight * 1.5/24;
+float imageDIVWidth = appWidth * 14/16;
+float imageDIVHeight = appHeight * 6.5/24;
 //
 //Image Aspect Ratio Vars & Algorithum 
 //Diretory or Pathway, Concatenation inciatetion string varaible spell correctly declaration ;
@@ -41,21 +41,25 @@ println("Testing for Decimals, formula unsing ints:", imageWidth1/imageHeight1);
 println("After casting added, Aspect Ratio >1:", image1AspectRatio_GreaterOne);
 
 //Algorithm Decisions (choice)
-float imageWidthAdjusted1 = imageWidth;
-float imageHeightAdjusted= (imageWidth1>=imageWidth)? imageWidthAdjusted1/image1AspectRatio_GreaterOne :imageWidthAdjusted1*image1AspectRatio_GreaterOne;//ternary operator
+float imageWidthAdjusted1 = imageDIVWidth;
+float imageHeightAdjusted1 = ( imageWidth1 >= imageDIVWidth ) ? imageWidthAdjusted1 * image1AspectRatio_GreaterOne : imageWidthAdjusted1 / image1AspectRatio_GreaterOne ; //Ternary Operator
+
 //Aspect Ratio
 
 /*
 imageWidth1
-imageDivWidth
+image1Width
 imageHeight1
-imageDivHeight
-imageDivWidth, imageDivHeight
+image1Height
+image1Width, image1Height
 */
 //if () {} else {} //End IF Aspect Ratio
 
 //
 //DIV
-rect(image1X, image1Y, image1Width, image1Height);
+
 //
-//image(image,imageX, imageY, imageWidthAdjusted1, imageHeightAdjusted1);
+//image( image1, imageDIVX, imageDIVY, imageDIVWidth, imageDIVHeight );
+image( image1, imageDIVX, imageDIVY, imageWidthAdjusted1, imageHeightAdjusted1 );
+//
+//End Program
