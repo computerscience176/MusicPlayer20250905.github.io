@@ -10,10 +10,10 @@ int appHeight = displayHeight; //the height
 println("Display VARS:", "appWidth:" + appWidth,"appHeight:"+ appHeight, "\n\tFullScreen: displayWidth:"+displayWidth, "displayHeight:"+displayHeight, "\n\t\t Size: width:"+width, "height:"+height);// glows green because its a perfect string \n makes new line \t tab
 //
 //Population
-float image1X = appWidth * 1/16;
-float image1Y = appHeight * 1.5/24;
-float image1Width = appWidth * 14/16;
-float image1Height = appHeight * 6.5/24;
+float imageX = appWidth * 1/16;
+float imageY = appHeight * 1.5/24;
+float imageWidth = appWidth * 14/16;
+float imageHeight = appHeight * 6.5/24;
 //
 //Image Aspect Ratio Vars & Algorithum 
 //Diretory or Pathway, Concatenation inciatetion string varaible spell correctly declaration ;
@@ -28,10 +28,33 @@ PImage image1 = loadImage(imagePathway1);
 int imageWidth1= 873;
 int imageHeight1= 760;
 //Aspect Ratio
-float image1AspectRatio_GreaterOne = ( imageWidth1 >= imageHeight1 )? imageWidth1/imageHeight1 : imageHeight1/imageWidth1;//Ternary Operator
-println(image1AspectRatio_GreaterOne);
+float image1AspectRatio_GreaterOne = ( imageWidth1 >= imageHeight1 ) ? float(imageWidth1)/float(imageHeight1) : float(imageHeight1)/float(imageWidth1) ; //Ternary Operator
+//ERROR, int populating float: truncating-adding zeros, casting
+/* Line Notes
+- Hardcoded Greater-Than-One Aspect Ratio, x or / >1 or <1
+- 2D information from Image, Apsect Ratio Number
+- Answers how to make image bigger or smaller
+- Computer calculated DIV width & height
+- Computer needs to compare image to DIV size difference
+*/
+println("Testing for Decimals, formula unsing ints:", imageWidth1/imageHeight1);
+println("After casting added, Aspect Ratio >1:", image1AspectRatio_GreaterOne);
+
+//Algorithm Decisions (choice)
+float imageWidthAdjusted1 = imageWidth;
+//Aspect Ratio
+
+/*
+imageWidth1
+imageDivWidth
+imageHeight1
+imageDivHeight
+imageDivWidth, imageDivHeight
+*/
+//if () {} else {} //End IF Aspect Ratio
+
 //
 //DIV
-rect(image1X, image1Y, image1Width, image1Height);
+rect(imageX, imageY, imageWidth, imageHeight);
 //
-image(image1,image1X, image1Y, image1Width, image1Height);
+//image(image,imageX, imageY, image1Width, image1Height);
