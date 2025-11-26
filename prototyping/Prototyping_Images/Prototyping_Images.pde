@@ -10,10 +10,10 @@ int appHeight = displayHeight; //the height
 println("Display VARS:", "appWidth:" + appWidth,"appHeight:"+ appHeight, "\n\tFullScreen: displayWidth:"+displayWidth, "displayHeight:"+displayHeight, "\n\t\t Size: width:"+width, "height:"+height);// glows green because its a perfect string \n makes new line \t tab
 //
 //Population
-float imageX = appWidth * 1/16;
-float imageY = appHeight * 1.5/24;
-float imageWidth = appWidth * 14/16;
-float imageHeight = appHeight * 6.5/24;
+float image1X = appWidth * 1/16;
+float image1Y = appHeight * 1.5/24;
+float image1Width = appWidth * 14/16;
+float image1Height = appHeight * 6.5/24;
 //
 //Image Aspect Ratio Vars & Algorithum 
 //Diretory or Pathway, Concatenation inciatetion string varaible spell correctly declaration ;
@@ -42,6 +42,7 @@ println("After casting added, Aspect Ratio >1:", image1AspectRatio_GreaterOne);
 
 //Algorithm Decisions (choice)
 float imageWidthAdjusted1 = imageWidth;
+float imageHeightAdjusted= (imageWidth1>=imageWidth)? imageWidthAdjusted1/image1AspectRatio_GreaterOne :imageWidthAdjusted1*image1AspectRatio_GreaterOne;//ternary operator
 //Aspect Ratio
 
 /*
@@ -55,6 +56,6 @@ imageDivWidth, imageDivHeight
 
 //
 //DIV
-rect(imageX, imageY, imageWidth, imageHeight);
+rect(image1X, image1Y, image1Width, image1Height);
 //
-//image(image,imageX, imageY, image1Width, image1Height);
+//image(image,imageX, imageY, imageWidthAdjusted1, imageHeightAdjusted1);
