@@ -25,8 +25,8 @@ String imagePathway1 = upArrow +folder +aliimran + fileExtensionJPG;
 //println("Aliimran Pathway:", imagePathway1);
 //Image Loading & Aspect Ratio
 PImage image1 = loadImage(imagePathway1);
-int imageWidth1= 873;
-int imageHeight1= 760;
+int imageWidth1= 729;
+int imageHeight1= 266;
 //Aspect Ratio
 float image1AspectRatio_GreaterOne = ( imageWidth1 >= imageHeight1 ) ? float(imageWidth1)/float(imageHeight1) : float(imageHeight1)/float(imageWidth1) ; //Ternary Operator
 //ERROR, int populating float: truncating-adding zeros, casting
