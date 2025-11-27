@@ -43,21 +43,12 @@ println("After casting added, Aspect Ratio >1:", image1AspectRatio_GreaterOne);
 //Algorithm Decisions (choice)
 float imageWidthAdjusted1 = imageDIVWidth;
 float imageHeightAdjusted1 = ( imageWidth1 >= imageDIVWidth ) ? imageWidthAdjusted1 * image1AspectRatio_GreaterOne : imageWidthAdjusted1 / image1AspectRatio_GreaterOne ; //Ternary Operator
-
-//Aspect Ratio
-
-/*
-imageWidth1
-image1Width
-imageHeight1
-image1Height
-image1Width, image1Height
-*/
-//if () {} else {} //End IF Aspect Ratio
-
+if ( imageHeightAdjusted1 > imageDIVHeight ) {
+  println("Image doesn't fit, program ended ... Fatal Flaw, must be solved ... Image doesn't show.");
+ // exit();
+  //
+}
 //
-//DIV
-
 //
 //image( image1, imageDIVX, imageDIVY, imageDIVWidth, imageDIVHeight );
 image( image1, imageDIVX, imageDIVY, imageWidthAdjusted1, imageHeightAdjusted1 );
