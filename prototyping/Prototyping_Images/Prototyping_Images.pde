@@ -24,7 +24,14 @@ String fileExtensionJPG = ".jpg";
 String imagePathway1 = upArrow +folder +aliimran + fileExtensionJPG;
 //println("Aliimran Pathway:", imagePathway1);
 //Image Loading & Aspect Ratio
+//Possible ERROR: NullPointerException on the Image
+PImage errorImage = loadImage( "flower.jpg" );
 PImage image1 = loadImage(imagePathway1);
+if ( image1 == null ) {
+  println("NullPointerException on Image ... Spelling Mistake with Pathway Concatenation");
+  image1 = errorImage;
+  exit(); //handled whenever the computer uses this part or Memory
+}
 int imageWidth1= 729;
 int imageHeight1= 266;
 //Aspect Ratio
@@ -45,10 +52,16 @@ float imageWidthAdjusted1 = imageDIVWidth;
 float imageHeightAdjusted1 = ( imageWidth1 >= imageDIVWidth ) ? imageWidthAdjusted1 * image1AspectRatio_GreaterOne : imageWidthAdjusted1 / image1AspectRatio_GreaterOne ; //Ternary Operator
 if ( imageHeightAdjusted1 > imageDIVHeight ) {
   println("Image doesn't fit, program ended ... Fatal Flaw, must be solved ... Image doesn't show.");
- // exit();
+  //exit();
+  int indexWhile=0;//local variable to if-statement garbage collection
+ //** WHILE loops can run infinitly without error if not controlled
+  while ( imageHeightAdjusted1>imageDIVHeight ) {
+    imageWidthAdjusted1 *= 0.99;
+    imageHeightAdjusted1 = imageWidthAdjusted1/image1AspectRatio_GreaterOne;
+    //println("Inspection of percent decrase:", imageWidthAdjusted1, imageHeightAdjusted1, imageDivHeight);
+  }
   //
 }
-//
 //
 //image( image1, imageDIVX, imageDIVY, imageDIVWidth, imageDIVHeight );
 image( image1, imageDIVX, imageDIVY, imageWidthAdjusted1, imageHeightAdjusted1 );
