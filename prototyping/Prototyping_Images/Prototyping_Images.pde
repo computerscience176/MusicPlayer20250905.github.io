@@ -1,10 +1,10 @@
-/* Aspect Ration: for my images x3
+/* Aspect Ratio: for my images x3
 -multi-line comment
 */
 //
 //Display
-fullScreen(); //landscape
-//size(900,400);// my image is a landscape
+//fullScreen(); //landscape
+size(900,400);// my image is a landscape
 int appWidth = displayWidth;// width int is integer
 int appHeight = displayHeight; //the height
 println("Display VARS:", "appWidth:" + appWidth,"appHeight:"+ appHeight, "\n\tFullScreen: displayWidth:"+displayWidth, "displayHeight:"+displayHeight, "\n\t\t Size: width:"+width, "height:"+height);// glows green because its a perfect string \n makes new line \t tab
@@ -44,25 +44,35 @@ float image1AspectRatio_GreaterOne = ( imageWidth1 >= imageHeight1 ) ? float(ima
 - Computer calculated DIV width & height
 - Computer needs to compare image to DIV size difference
 */
-println("Testing for Decimals, formula unsing ints:", imageWidth1/imageHeight1);
-println("After casting added, Aspect Ratio >1:", image1AspectRatio_GreaterOne);
+//println("Testing for Decimals, formula unsing ints:", imageWidth1/imageHeight1);
+//println("After casting added, Aspect Ratio >1:", image1AspectRatio_GreaterOne);
 
 //Algorithm Decisions (choice)
 float imageWidthAdjusted1 = imageDIVWidth;
 float imageHeightAdjusted1 = ( imageWidth1 >= imageDIVWidth ) ? imageWidthAdjusted1 * image1AspectRatio_GreaterOne : imageWidthAdjusted1 / image1AspectRatio_GreaterOne ; //Ternary Operator
+//Verification: looks good
 if ( imageHeightAdjusted1 > imageDIVHeight ) {
   println("Image doesn't fit, program ended ... Fatal Flaw, must be solved ... Image doesn't show.");
   //exit();
-  int indexWhile=0;//local variable to if-statement garbage collection
- //** WHILE loops can run infinitly without error if not controlled
+  int indexWhile = 0; //Local Variable to IF-Statement
+  //** WHILE Loops can run infinitely with an error if not controlled
   while ( imageHeightAdjusted1>imageDIVHeight ) {
-    imageWidthAdjusted1 *= 0.99;
+    println("Iteration of Percent WHILE Loop", indexWhile++); //prints value, then adds one, order is important in AP
+    if ( indexWhile < 10000 ) {
+      //Checking Image Size, below
+    } else {
+      //ERROR: Infinite Loop
+      println("ERROR: infinite loop, Image Percent WHILE, value:", indexWhile);
+      exit(); //doesn't work, must force WHILE Stop
+      imageHeightAdjusted1=imageDIVHeight; //makes WHILE False, stops WHILE
+    } //End Check Infinite loop
+    //Image Adjustment Percent v Pixel
+    imageWidthAdjusted1 *= 0.84; // -= 1
     imageHeightAdjusted1 = imageWidthAdjusted1/image1AspectRatio_GreaterOne;
-    //println("Inspection of percent decrase:", imageWidthAdjusted1, imageHeightAdjusted1, imageDivHeight);
-  }
+    println("Inspection of percent decrase:", imageWidthAdjusted1, imageHeightAdjusted1, imageDIVHeight);
+  } //End WHILE
   //
-}
-//
+} //END IF
 //image( image1, imageDIVX, imageDIVY, imageDIVWidth, imageDIVHeight );
 image( image1, imageDIVX, imageDIVY, imageWidthAdjusted1, imageHeightAdjusted1 );
 //
