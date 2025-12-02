@@ -4,7 +4,7 @@
 //
 //Display
 //fullScreen(); //Landscape
-size(500, 250); //Portrait, testing smaller DIVs ONLY
+size(600, 400); //Portrait, testing smaller DIVs ONLY
 int appWidth = width; //displayWidth
 int appHeight = height; //displayHeight
 //println("Display VARS:", "appWidth:"+appWidth, "appHeight:"+appHeight);
@@ -36,8 +36,8 @@ if ( image1 == null ) {
 }
 //Demonstrates alternate way to load an image without a pathway
 //
-int imageWidth1 = image1.width; // actual width
-int imageHeight1 = image1.height; // actual height
+int imageWidth1 = 281; // actual width
+int imageHeight1 = 91; // actual height
 //Aspect Ratio
 float image1AspectRatio_GreaterOne = ( imageWidth1 >= imageHeight1 ) ? float(imageWidth1)/float(imageHeight1) : float(imageHeight1)/float(imageWidth1) ; //Ternary Operator
 /* Line Notes
@@ -62,7 +62,7 @@ if ( imageHeightAdjusted1 > imageDivHeight ) {
       imageHeightAdjusted1=imageDivHeight; //makes WHILE False
     }
     //Image Adjustment Percent v Pixel
-    imageWidthAdjusted1 *= 0.99;
+    imageWidthAdjusted1 *= 0.79;
     imageHeightAdjusted1 = imageWidthAdjusted1 / image1AspectRatio_GreaterOne;
     println("Inspection of percent decrease:", imageWidthAdjusted1, imageHeightAdjusted1, imageDivHeight);
   }
@@ -72,6 +72,8 @@ if ( imageHeightAdjusted1 > imageDivHeight ) {
 rect( imageDivX, imageDivY, imageDivWidth, imageDivHeight );
 //
 //Draw Image
-image( image1, imageDivX, imageDivY, imageWidthAdjusted1, imageHeightAdjusted1 );
-//
+float drawX = imageDivX + (imageDivWidth - imageWidthAdjusted1) / 2;
+float drawY = imageDivY + (imageDivHeight - imageHeightAdjusted1) / 2;
+
+image(image1, drawX, drawY, imageWidthAdjusted1, imageHeightAdjusted1);
 //End Program

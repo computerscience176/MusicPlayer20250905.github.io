@@ -4,10 +4,10 @@
 //
 //Display
 //fullScreen(); //landscape
-size(900,400);// my image is a landscape
-int appWidth = displayWidth;// width int is integer
-int appHeight = displayHeight; //the height
-println("Display VARS:", "appWidth:" + appWidth,"appHeight:"+ appHeight, "\n\tFullScreen: displayWidth:"+displayWidth, "displayHeight:"+displayHeight, "\n\t\t Size: width:"+width, "height:"+height);// glows green because its a perfect string \n makes new line \t tab
+size(600,400);// my image is a landscape
+int appWidth = width;// width int is integer
+int appHeight = height; //the height
+//println("Display VARS:", "appWidth:" + appWidth,"appHeight:"+ appHeight, "\n\tFullScreen: displayWidth:"+displayWidth, "displayHeight:"+displayHeight, "\n\t\t Size: width:"+width, "height:"+height);// glows green because its a perfect string \n makes new line \t tab
 //
 //Population
 float imageDIVX = appWidth * 1/16;
@@ -32,8 +32,8 @@ if ( image1 == null ) {
   image1 = errorImage;
   exit(); //handled whenever the computer uses this part or Memory
 }
-int imageWidth1= 729;
-int imageHeight1= 266;
+int imageWidth1= 640;
+int imageHeight1= 233;
 //Aspect Ratio
 float image1AspectRatio_GreaterOne = ( imageWidth1 >= imageHeight1 ) ? float(imageWidth1)/float(imageHeight1) : float(imageHeight1)/float(imageWidth1) ; //Ternary Operator
 //ERROR, int populating float: truncating-adding zeros, casting
@@ -67,7 +67,7 @@ if ( imageHeightAdjusted1 > imageDIVHeight ) {
       imageHeightAdjusted1=imageDIVHeight; //makes WHILE False, stops WHILE
     } //End Check Infinite loop
     //Image Adjustment Percent v Pixel
-    imageWidthAdjusted1 *= 0.47; // -= 1
+    imageWidthAdjusted1 *= 0.86; // -= 1
     imageHeightAdjusted1 = imageWidthAdjusted1/image1AspectRatio_GreaterOne;
     println("Inspection of percent decrase:", imageWidthAdjusted1, imageHeightAdjusted1, imageDIVHeight);
   } //End WHILE
@@ -95,7 +95,12 @@ if ( imageHeightAdjusted1 > imageDIVHeight ) {
 } //END IF
 //
 //DIV
+rect( imageDIVX, imageDIVY, imageDIVWidth, imageDIVHeight );
+
 //image( image1, imageDIVX, imageDIVY, imageDIVWidth, imageDIVHeight );
-image( image1, imageDIVX, imageDIVY, imageWidthAdjusted1, imageHeightAdjusted1 );
-//
+//Draw Image
+float drawX = imageDIVX + (imageDIVWidth - imageWidthAdjusted1) / 2;
+float drawY = imageDIVY + (imageDIVHeight - imageHeightAdjusted1) / 2;
+
+image(image1, drawX, drawY, imageWidthAdjusted1, imageHeightAdjusted1);
 //End Program
