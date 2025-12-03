@@ -20,7 +20,7 @@ float imageDIVHeight = appHeight * 6.5/24;
 String upArrow = "../../";
 String folder = "Images/";
 String aliimran = "aliimran";
-String fileExtensionJPG = ".jpg";
+String fileExtensionJPG = ".png";
 String imagePathway1 = upArrow +folder +aliimran + fileExtensionJPG;
 //println("Aliimran Pathway:", imagePathway1);
 //Image Loading & Aspect Ratio
@@ -32,8 +32,8 @@ if ( image1 == null ) {
   image1 = errorImage;
   exit(); //handled whenever the computer uses this part or Memory
 }
-int imageWidth1= 640;
-int imageHeight1= 233;
+int imageWidth1= 555;
+int imageHeight1= 214;
 //Aspect Ratio
 float image1AspectRatio_GreaterOne = ( imageWidth1 >= imageHeight1 ) ? float(imageWidth1)/float(imageHeight1) : float(imageHeight1)/float(imageWidth1) ; //Ternary Operator
 //ERROR, int populating float: truncating-adding zeros, casting
@@ -67,7 +67,7 @@ if ( imageHeightAdjusted1 > imageDIVHeight ) {
       imageHeightAdjusted1=imageDIVHeight; //makes WHILE False, stops WHILE
     } //End Check Infinite loop
     //Image Adjustment Percent v Pixel
-    imageWidthAdjusted1 *= 0.86; // -= 1
+    imageWidthAdjusted1 *= 0.91; // -= 1
     imageHeightAdjusted1 = imageWidthAdjusted1/image1AspectRatio_GreaterOne;
     println("Inspection of percent decrase:", imageWidthAdjusted1, imageHeightAdjusted1, imageDIVHeight);
   } //End WHILE
@@ -99,7 +99,7 @@ rect( imageDIVX, imageDIVY, imageDIVWidth, imageDIVHeight );
 
 //image( image1, imageDIVX, imageDIVY, imageDIVWidth, imageDIVHeight );
 //Draw Image
-float drawX = imageDIVX + (imageDIVWidth - imageWidthAdjusted1) / 2;
+float drawX = imageDIVX + (imageDIVWidth - imageWidthAdjusted1) / 2;// it si sidvided by 2 because we ant to equal spaces on 2 sides
 float drawY = imageDIVY + (imageDIVHeight - imageHeightAdjusted1) / 2;
 
 image(image1, drawX, drawY, imageWidthAdjusted1, imageHeightAdjusted1);
