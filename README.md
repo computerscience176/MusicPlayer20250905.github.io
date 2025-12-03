@@ -7,6 +7,6 @@ Music Player Project for Computer Science 10
 ---
 - [x] Create To Do List in Markdown
 - [x] Thematic Music Player
-- [ ] 3 Songs, and One Sound effect (minimum)
-- [ ] 3 images minimum
-- [ ] TCA
+- [x] 3 Songs, and One Sound effect (minimum)
+- [x] 3 images minimum
+- [x] TBA
