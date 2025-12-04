@@ -62,7 +62,7 @@ if ( imageHeightAdjusted1 > imageDivHeight ) {
       imageHeightAdjusted1=imageDivHeight; //makes WHILE False
     }
     //Image Adjustment Percent v Pixel
-    imageWidthAdjusted1 *= 0.84;
+    imageWidthAdjusted1 *= 0.84;//changes i to match image
     imageHeightAdjusted1 = imageWidthAdjusted1 / image1AspectRatio_GreaterOne;
     println("Inspection of percent decrease:", imageWidthAdjusted1, imageHeightAdjusted1, imageDivHeight);
   }
@@ -71,9 +71,9 @@ if ( imageHeightAdjusted1 > imageDivHeight ) {
 //DIV
 rect( imageDivX, imageDivY, imageDivWidth, imageDivHeight );
 //
-//Draw Image
+//Draw Image put in center below 
 float drawX = imageDivX + (imageDivWidth - imageWidthAdjusted1) / 2;
-float drawY = imageDivY + (imageDivHeight - imageHeightAdjusted1) / 2;
+float drawY = imageDivY + (imageDivHeight - imageHeightAdjusted1) / 2;// divided by 2 to make 2 equal spaces on the 2 side so its in the center 
 
 image(image1, drawX, drawY, imageWidthAdjusted1, imageHeightAdjusted1);
 //End Program
