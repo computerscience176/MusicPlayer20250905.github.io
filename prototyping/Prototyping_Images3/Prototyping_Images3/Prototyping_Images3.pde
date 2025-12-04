@@ -18,7 +18,7 @@ float imageDivHeight = appHeight*6.5/24.0;
 //
 //Image Aspect Ratio Vars & Algorithm
 //Directory or Pathway, Concatenation
-String upArrow = "../../";
+String upArrow = "../../../";
 String folder = "Images/";
 String baqarah = "baqarah";
 String fileExtensionPNG = ".png";
