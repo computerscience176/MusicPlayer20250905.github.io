@@ -1,5 +1,4 @@
-/* Handling Errors, including resizing image automatically
- - NullPointerException on the Image-Variable
+/* Array pics *3
  */
 //
 //Display
@@ -62,7 +61,7 @@ if ( imageHeightAdjusted1 > imageDivHeight ) {
       imageHeightAdjusted1=imageDivHeight; //makes WHILE False
     }
     //Image Adjustment Percent v Pixel
-    imageWidthAdjusted1 *= 0.84;//changes i to match image
+    imageWidthAdjusted1 *= 0.84;//changes it to match image
     imageHeightAdjusted1 = imageWidthAdjusted1 / image1AspectRatio_GreaterOne;
     println("Inspection of percent decrease:", imageWidthAdjusted1, imageHeightAdjusted1, imageDivHeight);
   }
