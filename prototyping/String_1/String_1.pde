@@ -14,13 +14,14 @@ float aboutX = appWidth * 1/16;
 float aboutY = appHeight * 11/24;
 float aboutWidth = appWidth * 2.3/16;
 float aboutHeight = appHeight * 1/24;
+rect(aboutX, aboutY, aboutWidth, aboutHeight);
 //
 //Strings, Text, Literal
-String about = "About";
+String about = "ABOUT";
 /*
 Website Name: To be determined
 Profile: The name of the person of the account name
-Title: depends on audio, Al Imran, Baqarah, and Fatiha
+about: depends on audio, Al Imran, Baqarah, and Fatiha
 By: The reciter
 lyrcis and about: depends on audio
 time1 and time2: the time played, and the lenghth of audio
@@ -31,20 +32,38 @@ println("Start of Console");
 String[] fontList = PFont.list();//list all fonts availabe
 printArray (fontList); //listing all possible fonts to choose, then creatFont
 */
-float fontSize = 45.0 ;//entire program one font size
-PFont titleFont; //font var name 
+float fontSize = appHeight ;//entire program one font size
+PFont aboutFont; //font var name 
 String Segoe = "Segoe UI";
-titleFont = createFont (Segoe, fontSize);
+aboutFont = createFont (Segoe, fontSize);
 //Tools / Create Font / Find Font / Do Not Press "OK", known conflict between loadFont() and createFont()
 //
-println(fontSize, Segoe, titleFont);
-
+println(fontSize, Segoe, aboutFont);
+float fontSizeSegoe = 34.0;
+println("Font Size:", fontSize);
+/*Aspect Ratio manuplation - changes to varaibles
+-chose aspect Ratio that must be multiplied : fontSize/titleHeight
+-rewriting fontSize with formula
+*/
+float segoeAspectRatio = fontSizeSegoe/aboutHeight;
+fontSize =  aboutHeight* segoeAspectRatio;
+println(" Segoe UI Aspect Ratio:", segoeAspectRatio);
+println();//skip one line
 //
-fill(#1A3B5D);
-rect(aboutX, aboutY, aboutWidth, aboutHeight);
+color goldInk = #003DA5 ; // (grey scale, 256), colour
+color whiteInk = #FFFFFF ; //Grey Scale is 255
+color resetInk = whiteInk;
+fill(goldInk); //Ink, hexidecimal copied from Color Selector
+//Grey Scale 0-255
+textAlign (CENTER, TOP); //Align X&Y, see Processing.org / Reference
+//Values: [LEFT | CENTER | RIGHT] & [TOP | CENTER | BOTTOM | BASELINE]
 //
-color goldInk = #FFFFFF ;//hexadecimal
-fill(goldInk);//ink, 0-255 inbetween is grey = grey scale
-textFont(titleFont,fontSize);//see variable notes
-
-text(about ,aboutX, aboutY, aboutWidth, aboutHeight);
+textFont(aboutFont, fontSize); //see variable note
+//WHILE Error Check
+//textFont() has option to combine font declaration with textSize()
+//textFont() is better for more than one PFont Variable
+//
+text( about, aboutX, aboutY, aboutWidth, aboutHeight );
+fill(resetInk);
+//
+//End Program
