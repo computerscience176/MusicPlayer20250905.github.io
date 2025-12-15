@@ -10,10 +10,10 @@ int appHeight = height; //the height
 //println("Display VARS:", "appWidth:" + appWidth,"appHeight:"+ appHeight, "\n\tFullScreen: displayWidth:"+displayWidth, "displayHeight:"+displayHeight, "\n\t\t Size: width:"+width, "height:"+height);// glows green because its a perfect string \n makes new line \t tab
 //
 //Population
-float imageDIVX = appWidth * 1/16;
-float imageDIVY = appHeight * 1.5/24;
-float imageDIVWidth = appWidth * 14/16;
-float imageDIVHeight = appHeight * 6.5/24;
+float picDivX = appWidth * 1/16;
+float picDivY = appHeight * 1.5/24;
+float picDivWidth = appWidth * 14/16;
+float picDivHeight = appHeight * 6.5/24;
 //
 //Image Aspect Ratio Vars & Algorithum 
 //Diretory or Pathway, Concatenation inciatetion string varaible spell correctly declaration ;
@@ -48,15 +48,15 @@ float image1AspectRatio_GreaterOne = ( imageWidth1 >= imageHeight1 ) ? float(ima
 //println("After casting added, Aspect Ratio >1:", image1AspectRatio_GreaterOne);
 
 //Algorithm Decisions (choice)
-float imageWidthAdjusted1 = imageDIVWidth;
-float imageHeightAdjusted1 = ( imageWidth1 >= imageDIVWidth ) ? imageWidthAdjusted1 * image1AspectRatio_GreaterOne : imageWidthAdjusted1 / image1AspectRatio_GreaterOne ; //Ternary Operator
+float imageWidthAdjusted1 = picDivWidth;
+float imageHeightAdjusted1 = ( imageWidth1 >= picDivWidth ) ? imageWidthAdjusted1 * image1AspectRatio_GreaterOne : imageWidthAdjusted1 / image1AspectRatio_GreaterOne ; //Ternary Operator
 //Verification: looks good
-if ( imageHeightAdjusted1 > imageDIVHeight ) {
+if ( imageHeightAdjusted1 > picDivHeight ) {
   println("Image doesn't fit, program ended ... Fatal Flaw, must be solved ... Image doesn't show.");
   //exit();
   int indexWhile = 0; //Local Variable to IF-Statement
   //** WHILE Loops can run infinitely with an error if not controlled
-  while ( imageHeightAdjusted1>imageDIVHeight ) {
+  while ( imageHeightAdjusted1>picDivHeight ) {
     println("Iteration of Percent WHILE Loop", indexWhile++); //prints value, then adds one, order is important in AP
     if ( indexWhile < 10000 ) {
       //Checking Image Size, below
@@ -64,12 +64,12 @@ if ( imageHeightAdjusted1 > imageDIVHeight ) {
       //ERROR: Infinite Loop
       println("ERROR: infinite loop, Image Percent WHILE, value:", indexWhile);
       exit(); //doesn't work, must force WHILE Stop
-      imageHeightAdjusted1=imageDIVHeight; //makes WHILE False, stops WHILE
+      imageHeightAdjusted1=picDivHeight; //makes WHILE False, stops WHILE
     } //End Check Infinite loop
     //Image Adjustment Percent v Pixel
     imageWidthAdjusted1 *= 0.91; // -= 1
     imageHeightAdjusted1 = imageWidthAdjusted1/image1AspectRatio_GreaterOne;
-    println("Inspection of percent decrase:", imageWidthAdjusted1, imageHeightAdjusted1, imageDIVHeight);
+    println("Inspection of percent decrase:", imageWidthAdjusted1, imageHeightAdjusted1, picDivHeight);
   } //End WHILE
   //Percent will be too small, must count back up but be smaller than total iterations
   /* Accuracy Comment, for AP Students
@@ -78,7 +78,7 @@ if ( imageHeightAdjusted1 > imageDIVHeight ) {
    - FYI: 1% gets within 3 pixels of actual answer
    - AP Project: combine into faster answer by counting lines of code executed
    */
-  while ( imageHeightAdjusted1<imageDIVHeight ) {
+  while ( imageHeightAdjusted1<picDivHeight ) {
     println("Iteration of Pixel WHILE Loop", indexWhile++); //prints value, then adds one, order is important in AP
     if ( indexWhile < 10000 ) {
       //Checking Image Size
@@ -86,21 +86,21 @@ if ( imageHeightAdjusted1 > imageDIVHeight ) {
       //ERROR: Infinite Loop
       println("ERROR: infinite loop, Image Pixel WHILE, value:", indexWhile);
       //exit(); //doesn't work, must force WHILE Stop
-      imageHeightAdjusted1=imageDIVHeight;
+      imageHeightAdjusted1=picDivHeight;
     }
     imageHeightAdjusted1++;
-    println("Inspection of percent dcrease:", imageWidthAdjusted1, imageHeightAdjusted1, imageDIVHeight);
+    println("Inspection of percent dcrease:", imageWidthAdjusted1, imageHeightAdjusted1, picDivHeight);
   } //End WHILE Error Check, Counting Up
   //
 } //END IF
 //
 //DIV
-rect( imageDIVX, imageDIVY, imageDIVWidth, imageDIVHeight );
+rect( picDivX, picDivY, picDivWidth, picDivHeight );
 
-//image( image1, imageDIVX, imageDIVY, imageDIVWidth, imageDIVHeight );
+//image( image1, picDivX, picDivY, picDivWidth, picDivHeight );
 //Draw Image
-float drawX = imageDIVX + (imageDIVWidth - imageWidthAdjusted1) / 2;// it si sidvided by 2 because we ant to equal spaces on 2 sides
-float drawY = imageDIVY + (imageDIVHeight - imageHeightAdjusted1) / 2;
+float drawX = picDivX + (picDivWidth - imageWidthAdjusted1) / 2;// it si sidvided by 2 because we ant to equal spaces on 2 sides
+float drawY = picDivY + (picDivHeight - imageHeightAdjusted1) / 2;
 
 image(image1, drawX, drawY, imageWidthAdjusted1, imageHeightAdjusted1);
 //End Program

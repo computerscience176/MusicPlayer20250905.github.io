@@ -11,10 +11,10 @@ int appHeight = height; //displayHeight
 //println("\t\t\t\tFullScreen, displayWidth:\t"+displayWidth, "\tdisplayHeight:\t"+displayHeight, "\n\t\t\t\tSize\t, width:\t\t"+width, "\theight:\t\t"+height);
 //
 //Population
-float imageDivX = appWidth*1/16.0; //**Awkward DIV
-float imageDivY = appHeight*1.5/24.0;
-float imageDivWidth = appWidth*14/16.0;
-float imageDivHeight = appHeight*6.5/24.0; // ** Make smaller to test height
+float secondImageX = appWidth*1/16.0; //**Awkward DIV
+float secondImageY = appHeight*1.5/24.0;
+float secondImageWidth = appWidth*14/16.0;
+float secondImageHeight = appHeight*6.5/24.0; // ** Make smaller to test height
 //
 //Image Aspect Ratio Vars & Algorithm
 //Directory or Pathway, Concatenation
@@ -47,33 +47,33 @@ float image1AspectRatio_GreaterOne = ( imageWidth1 >= imageHeight1 ) ? float(ima
  - Computer compares image to DIV size
  */
 //Algorithm Decisions (choice)
-float imageWidthAdjusted1 = imageDivWidth;
-float imageHeightAdjusted1 = ( imageWidth1 >= imageDivWidth ) ? imageWidthAdjusted1 / image1AspectRatio_GreaterOne : imageWidthAdjusted1 * image1AspectRatio_GreaterOne ; //Ternary Operator
+float imageWidthAdjusted1 = secondImageWidth;
+float imageHeightAdjusted1 = ( imageWidth1 >= secondImageWidth ) ? imageWidthAdjusted1 / image1AspectRatio_GreaterOne : imageWidthAdjusted1 * image1AspectRatio_GreaterOne ; //Ternary Operator
 //Verification: looks good
-if ( imageHeightAdjusted1 > imageDivHeight ) {
+if ( imageHeightAdjusted1 > secondImageHeight ) {
   int indexWhile = 0; //Local Variable to IF-Statement
-  while ( imageHeightAdjusted1>imageDivHeight ) {
+  while ( imageHeightAdjusted1>secondImageHeight ) {
     println("Iteration of Percent WHILE Loop", indexWhile++);
     if ( indexWhile < 10000 ) {
       //Checking Image Size
     } else {
       println("ERROR: infinite loop, Image Percent WHILE, value:", indexWhile);
       exit(); // stop program
-      imageHeightAdjusted1=imageDivHeight; //makes WHILE False
+      imageHeightAdjusted1=secondImageHeight; //makes WHILE False
     }
     //Image Adjustment Percent v Pixel
     imageWidthAdjusted1 *= 0.79;
     imageHeightAdjusted1 = imageWidthAdjusted1 / image1AspectRatio_GreaterOne;
-    println("Inspection of percent decrease:", imageWidthAdjusted1, imageHeightAdjusted1, imageDivHeight);
+    println("Inspection of percent decrease:", imageWidthAdjusted1, imageHeightAdjusted1, secondImageHeight);
   }
 }
 //
 //DIV
-rect( imageDivX, imageDivY, imageDivWidth, imageDivHeight );
+rect(secondImageX,secondImageY,secondImageWidth,secondImageHeight);
 //
 //Draw Image
-float drawX = imageDivX + (imageDivWidth - imageWidthAdjusted1) / 2;
-float drawY = imageDivY + (imageDivHeight - imageHeightAdjusted1) / 2;
+float drawX = secondImageX + (secondImageWidth - imageWidthAdjusted1) / 2;
+float drawY = secondImageY + (secondImageHeight - imageHeightAdjusted1) / 2;
 
 image(image1, drawX, drawY, imageWidthAdjusted1, imageHeightAdjusted1);
 //End Program
