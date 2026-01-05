@@ -53,7 +53,7 @@ for (int i = 0; i < availableFonts.length; i++) {
 */
 
 // ---------------------------
-// FONT SETUP (safe on school computers)
+// FONT SETUP 
 // ---------------------------
 String[] fontNames = {"Segoe UI Bold","Segoe UI","Segoe UI","Cambria Bold","Calibri"}; // Font per DIV
 float[] fontSizes = {36, 20, 22, 65, 35}; // Starting font sizes
@@ -86,7 +86,7 @@ for(int i=0;i<numberOfDivs;i++){
 for(int i=0;i<numberOfDivs;i++){
   fill(BOX_COLOR);                            // Box fill
   stroke(BORDER_COLOR);                        // Box border
-  strokeWeight(1.5);                           // Border thickness
+  strokeWeight(2.0);                           // Border thickness
   rect(DivX[i],DivY[i],DivWidth[i],DivHeight[i]); // Draw box
 
   fill(TEXT_COLOR);                            // Text color
@@ -122,7 +122,7 @@ while(textAscent()+textDescent() > lyricsHeight-2*padding){ // Shrink if too tal
 // Draw lyrics box
 fill(BOX_COLOR);                               // White box
 stroke(BORDER_COLOR);                           // Black border
-strokeWeight(1.5);                              // Thickness
+strokeWeight(2.0);                              // Thickness
 rect(lyricsX,lyricsY,lyricsWidth,lyricsHeight); // Draw box
 
 fill(TEXT_COLOR);                               // Text black
@@ -141,7 +141,7 @@ String[] timeText = {"0:00","0:00"};               // Placeholder times
 for(int i=0;i<2;i++){
   fill(BOX_COLOR);                                 // Box white
   stroke(BORDER_COLOR);                             // Border black
-  strokeWeight(1.5);                                // Thickness
+  strokeWeight(2.0);                                // Thickness
   rect(timeX[i],timeY,timeW,timeH);                // Draw box
 
   fill(TEXT_COLOR);                                 // Text black
