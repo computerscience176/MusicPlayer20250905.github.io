@@ -16,5 +16,35 @@
  */
 //
 //Library - Minim
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
 //
 //Global Variables
+Minim minim;//intiate a class
+int SongsNumber = 3;//best practice
+int SoundEffectNumber= 1;//best practice
+AudioPlayer[] songs = new AudioPlayer [SongsNumber]
+AudioPlayer[] SoundEffect = new AudioPlayer[SoundEffectNumber];
+int currentsong= SongsNumber-SongsNumber;//zero, math property
+//
+void setup() {
+  size(900,400);//width //Height
+//fullScreen();//diplayWidth //DisplayHeight
+int appWidth= width;
+int appHeight= height;
+} //End setup
+//
+void draw() {
+} //End draw
+//
+void mousePressed() {
+}//end mousePressed
+//
+void keyPressed() {
+}//end keyPressed
+//
+//END MAIN program
