@@ -1,4 +1,5 @@
-/* Hearing Music and Sound Effects
+/* Copied from Music Static
+ - Hearing Music and Sound Effects
  - Reading Code with CTRL-T & Braces
  - Global Variable V Local Variable, Garbage Collection
  */
@@ -13,68 +14,65 @@ import ddf.minim.spi.*;
 import ddf.minim.ugens.*;
 //
 //Global Variables
-Minim minim; //initates entire class
-int SongsNumber = 3; //Best Practice
-int SoundEffectNumber = 1; //Best Practice
-AudioPlayer[] Songs = new AudioPlayer[ SongsNumber ];
-AudioPlayer[] soundEffects = new AudioPlayer[ SoundEffectNumber];
-int currentSong = SongsNumber - SongsNumber; //ZERO, Math Property
+Minim minim; //initiates entire class
+int numberOfSongs = 3; //Best Practice
+int numberOfSoundEffects = 1; //Best Practice
+AudioPlayer[] playList = new AudioPlayer[ numberOfSongs ];
+AudioPlayer[] soundEffects = new AudioPlayer[ numberOfSoundEffects];
+int currentSong = numberOfSongs - numberOfSongs; //ZERO, Math Property
 //
 void setup() {
   //Display
   size(900, 400); //width //height
-  //fullScreen(); //displayWidth //displayHeight
   int appWidth = width; //Best Practice
   int appHeight = height;
   //
   //Music Loading - STRUCTURED Review
-  minim = new Minim(this);
-  String upArrow= "../";
-  String MusicFolder= "Music/";
-  String Fatiha= "001";
-  String Baqarah= "002";
-  String Aliimran= "003";
+  minim = new Minim(this); //Mandatory
+  String upArrow = "../../../"; //3 folders up from sketch
+  String musicFolder = "Music/"; //Your folder
+  String song1 = "001";
+  String song2 = "002";
+  String song3 = "003";
   String soundEffect1 = "soundeffect";
-  String fileExtension_mp3= ".mp3";
-  String fileExtension_wav= ".wav";
+  String fileExtension_mp3 = ".mp3";
   //
-  String musicDirectory = upArrow + MusicFolder;//concatination
-  String soundEffectsDirectory = upArrow + MusicFolder; //Concatenation
-  String file1 = musicDirectory + Fatiha +fileExtension_mp3;
-  String file2 = musicDirectory + Baqarah +fileExtension_mp3;
-  String file3 = musicDirectory + Aliimran +fileExtension_mp3;
+  String musicDirectory = upArrow + musicFolder; //Concatenation
+  String file = musicDirectory + song1 + fileExtension_mp3;
+  playList[ currentSong ] = minim.loadFile( file ); //Load first song
 
-  //println("Music Pathway:", musicDirectory);
-  //println("Full Music File Pathway:", file1);
-  // println("Full Music File Pathway:", file2);
-  //println("Full Music File Pathway:", file3);
-  //
-  Songs[ currentSong ] = minim.loadFile( file1 ); //ERROR: Verify Spelling & Library installed, Sketch / Import Library
-  String file4 = soundEffectsDirectory + soundEffect1 + fileExtension_wav; //Rewritting FILE
-  soundEffects[currentSong] = minim.loadFile( file4 ); //ERROR: Verify Spelling & Library installed, Sketch / Import Library
+  file = musicDirectory + soundEffect1 + fileExtension_mp3;
+  soundEffects[currentSong] = minim.loadFile( file ); //Load sound effect
+
+  //Load the other songs into the playlist
+  playList[1] = minim.loadFile(musicDirectory + song2 + fileExtension_mp3);
+  playList[2] = minim.loadFile(musicDirectory + song3 + fileExtension_mp3);
   //
   //ERROR Check Music and Sound Effect Variables
-  //ERROR Check Music and Sound Effect Variables
-  //Thrown by commenting out FILE, Songs[] or soundEffects[]
-  if ( Songs[currentSong]==null || soundEffects[currentSong]==null) { //ERROR, play list is NULL
-    //See FILE or minim.loadFile
-    println("The Play List or Sound Effects did not load properly");
-    printArray(Songs);
-    printArray(soundEffects);
-    /*
-  println("Music Pathway", musicDirectory);
-     println("Full Music File Pathway", file);
-     */
-  } //End ERROR Check Music and Sound Effect Variables
+ // ERROR CHECK - print each song and sound effect
+for (int i = 0; i < playList.length; i++) {
+  if (playList[i] != null) {
+    println("Song " + i + " loaded successfully: " + playList[i]);
+  } else {
+    println("Song " + i + " FAILED to load!");
+  }
+}
+
+for (int i = 0; i < soundEffects.length; i++) {
+  if (soundEffects[i] != null) {
+    println("Sound effect " + i + " loaded successfully: " + soundEffects[i]);
+  } else {
+    println("Sound effect " + i + " FAILED to load!");
+  }
+}
   //
-  //testing sound
- if (Songs[currentSong] != null) Songs[currentSong].play();
-  //SoundEffect[currentSong].play();
-  //
+  //Testing Sound
+  playList[currentSong].play(); //Deactivates void draw()
+  //soundEffects[currentSong].play(); //optional
 } //End setup
 //
 void draw() {
-  //Songs [currentSong].play();//draw is activated by noLoop()
+  playList[currentSong].play(); //DRAW is deactivated by noLoop()
 } //End draw
 //
 void mousePressed() {
