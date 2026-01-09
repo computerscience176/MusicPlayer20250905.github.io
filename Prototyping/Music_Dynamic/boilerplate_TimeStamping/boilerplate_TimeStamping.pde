@@ -1,22 +1,30 @@
 /* Time Stamping, Program efficiency
- 
+ - uses millis()
+ - noLoop() affects exit() in draw()
  */
 //
 //Library - Minim
 //
-//Global Variables
-int timeStart;
+//Global Variables 
+int timerStart, currentTime, endSetup, drawBeginning, drawEnd;
 //
 void setup() {
-  timeStart = millis();//measure program start time called "scope"
-  println("Beginning", timeStart);
-  //code for setup()
-  println("End Setup", timeStart);
+  timerStart = millis(); //Measure program start time called "scope"
+  println("Beginning", timerStart);
+  //Code for Setup()
+  endSetup = millis();
+  println("End Setup", endSetup);
 } //End setup
 //
 void draw() {
-  println("Draw", timeStart);
-  noLoop();
+  drawBeginning = millis();
+  println("Draw Beginning", drawBeginning);
+  noLoop(); //Affects exit() & draw() looping
+  drawEnd = millis();
+  println("Draw End 1:", drawEnd);
+  exit();
+  drawEnd = millis();
+  println("Draw End 2:", drawEnd);
 } //End draw
 //
 void mousePressed() {
