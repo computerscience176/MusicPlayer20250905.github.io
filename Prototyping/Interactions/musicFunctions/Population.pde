@@ -4,6 +4,12 @@
  */
 //
 void divPopulation () {
+  forwardX = appWidth * 4.3 / 16;
+  forwardY = appHeight * 20.4 / 24;
+  forwardWidth = appWidth * 1.4 / 16;
+  forwardHeight = appHeight * 2.5 / 24;
+  rect(forwardX, forwardY, forwardWidth, forwardHeight);
+
   topPanelX = appWidth * 0/16;
   topPanelY = appHeight * 0/24;
   topPanelWidth = appWidth * 16/16;
