@@ -111,9 +111,14 @@ void setup() {
   nightMode = false;
   colourPopulation();
   musicSetup();
+  textSetup();
 } //End setup
 //
 void draw() {
+  background(resetBackgroundDay);  // **CRITICAL** - CLEAR SCREEN
+  DIVs();                         // Your rectangles
+  musicButtonShapes();            // Your buttons  
+  textdraw();                     // **TEXT LAST** - on top
   //println ("My Mouse is", mouseX, mouseY);
   //println (playButton);
   //hoverOver_draw(); //See Buttons
