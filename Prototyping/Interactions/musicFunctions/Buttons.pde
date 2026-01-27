@@ -1,99 +1,695 @@
-/* -----------------------
-   BUTTONS SUBPROGRAM
-   Includes: Quit, Previous, Play, Forward, Volume, More, Add, Three Lines, Customize, Notes, Search, Playlist, Bookmark, Speed
-   All comments preserved, all floats local
-   -----------------------
-*/
-
-// Quit Button (commented out, preserved)
- /*
- void quitButton() {
-   noLoop(); // Adjusts the exit of the program using finishing draw()
-   exit();   // With noLoop(), exit happens here
-   println("Final Line of mousePressed and finishes draw()");
- } // End Quit Button
+/* Buttons Subprogram
+ * Handles button rendering, hover states, and mouse interactions
  */
 
-// Draw all rectangles / outer DIVs
-void DIVs() {
-  rect(imageX, imageY, imageWidth, imageHeight);
-  rect(addX, addY, addWidth, addHeight);
-  rect(titleX, titleY, titleWidth, titleHeight);
-  rect(textboxX, textboxY, textboxWidth, textboxHeight);
-  rect(aboutX, aboutY, aboutWidth, aboutHeight);
-  rect(byX, byY, byWidth, byHeight);
-  rect(lyricsX, lyricsY, lyricsWidth, lyricsHeight);
-  rect(iconBoxX, iconBoxY, iconBoxWidth, iconBoxHeight);
-  rect(playlistX, playlistY, playlistWidth, playlistHeight);
-  rect(volumeX, volumeY, volumeWidth, volumeHeight);
-  rect(arabicX, arabicY, arabicWidth, arabicHeight);
-  rect(englishX, englishY, englishWidth, englishHeight);
-  rect(customizeX, customizeY, customizeWidth, customizeHeight);
-  rect(notesX, notesY, notesWidth, notesHeight);
-  rect(rectanglearoundtimeX, rectanglearoundtimeY, rectanglearoundtimeWidth, rectanglearoundtimeHeight);
+void drawButtons() {
+  // Draw all interactive buttons with hover
+  hoverOver_draw();
+  
+  // Draw all icon buttons on right side with hover
+  hoverOverIconButtons();
+  
+  // Draw top menu buttons with hover
+  hoverOverTopMenuButtons();
+  
+  // Draw progress bar if song is playing
+  if (playList[currentSong].isPlaying()) {
+    drawProgressBar();
+  }
+} // End drawButtons
+
+// ==================== HOVER OVER STATES ====================
+
+void hoverOver_draw() {
+  // Previous Button
+  if (mouseX > previousX && mouseX < previousX + previousWidth && 
+      mouseY > previousY && mouseY < previousY + previousHeight) {
+    previousButtonActive();
+  } else {
+    previousButtonRegular();
+  }
+  
+  // Play/Pause Button
+  if (mouseX > playX && mouseX < playX + playWidth && 
+      mouseY > playY && mouseY < playY + playHeight) {
+    playButtonActive();
+  } else {
+    playButtonRegular();
+  }
+  
+  // Forward Button
+  if (mouseX > forwardX && mouseX < forwardX + forwardWidth && 
+      mouseY > forwardY && mouseY < forwardY + forwardHeight) {
+    forwardButtonActive();
+  } else {
+    forwardButtonRegular();
+  }
+} // End hoverOver_draw
+
+// ==================== HOVER OVER FOR ICON BUTTONS ====================
+
+void hoverOverIconButtons() {
+  // Volume Button
+  if (mouseX > volumeX && mouseX < volumeX + volumeWidth && 
+      mouseY > volumeY && mouseY < volumeY + volumeHeight) {
+    drawVolumeButtonHover();
+  } else {
+    drawVolumeButton();
+  }
+  
+  // Playlist Button
+  if (mouseX > playlistX && mouseX < playlistX + playlistWidth && 
+      mouseY > playlistY && mouseY < playlistY + playlistHeight) {
+    drawPlaylistButtonHover();
+  } else {
+    drawPlaylistButton();
+  }
+  
+  // Customize Button
+  if (mouseX > customizeX && mouseX < customizeX + customizeWidth && 
+      mouseY > customizeY && mouseY < customizeY + customizeHeight) {
+    drawCustomizeButtonHover();
+  } else {
+    drawCustomizeButton();
+  }
+  
+  // Notes Button
+  if (mouseX > notesX && mouseX < notesX + notesWidth && 
+      mouseY > notesY && mouseY < notesY + notesHeight) {
+    drawNotesButtonHover();
+  } else {
+    drawNotesButton();
+  }
+  
+  // More Button 1
+  if (mouseX > more1X && mouseX < more1X + more1Width && 
+      mouseY > more1Y && mouseY < more1Y + more1Height) {
+    drawMoreButton1Hover();
+  } else {
+    drawMoreButton1();
+  }
+  
+  // More Button 2
+  if (mouseX > more2X && mouseX < more2X + more2Width && 
+      mouseY > more2Y && mouseY < more2Y + more2Height) {
+    drawMoreButton2Hover();
+  } else {
+    drawMoreButton2();
+  }
+  
+  // More Button 3
+  if (mouseX > more3X && mouseX < more3X + more3Width && 
+      mouseY > more3Y && mouseY < more3Y + more3Height) {
+    drawMoreButton3Hover();
+  } else {
+    drawMoreButton3();
+  }
+  
+  // Arabic Button
+  if (mouseX > arabicX && mouseX < arabicX + arabicWidth && 
+      mouseY > arabicY && mouseY < arabicY + arabicHeight) {
+    drawArabicButtonHover();
+  } else {
+    drawArabicButton();
+  }
+  
+  // English Button
+  if (mouseX > englishX && mouseX < englishX + englishWidth && 
+      mouseY > englishY && mouseY < englishY + englishHeight) {
+    drawEnglishButtonHover();
+  } else {
+    drawEnglishButton();
+  }
+} // End hoverOverIconButtons
+
+// ==================== HOVER OVER FOR TOP MENU BUTTONS ====================
+
+void hoverOverTopMenuButtons() {
+  // Three Dots Menu
+  if (mouseX > threeX && mouseX < threeX + threeWidth && 
+      mouseY > threeY && mouseY < threeY + threeHeight) {
+    drawThreeDotsMenuHover();
+  } else {
+    drawThreeDotsMenu();
+  }
+  
+  // Add Button
+  if (mouseX > addX && mouseX < addX + addWidth && 
+      mouseY > addY && mouseY < addY + addHeight) {
+    drawAddButtonHover();
+  } else {
+    drawAddButton();
+  }
+  
+  // Search Icon
+  if (mouseX > searchIconX && mouseX < searchIconX + searchIconWidth && 
+      mouseY > searchIconY && mouseY < searchIconY + searchIconHeight) {
+    drawSearchIconHover();
+  } else {
+    drawSearchIcon();
+  }
+  
+  // Search Bar (no hover - it's an input field)
+  drawSearchBar();
+} // End hoverOverTopMenuButtons
+
+// ==================== PREVIOUS BUTTON ====================
+
+void previousButtonRegular() {
+  // Fill background
+  fill(nightMode ? btnBackgroundNight : btnBackgroundDay);
   rect(previousX, previousY, previousWidth, previousHeight);
-  rect(previousX + previousWidth*1/4, previousY + previousHeight*1/4, previousWidth*1/8, previousHeight*1/2);
-  rect(playX, playY, playWidth, playHeight);
-  rect(forwardX, forwardY, forwardWidth, forwardHeight);
-  rect(forwardX + forwardWidth*5/8, forwardY + forwardHeight*1/4, forwardWidth*1/8, forwardHeight*1/2);
-  rect(timeBoxX, timeBoxY, timeBoxWidth, timeBoxHeight);
-  rect(timeX, timeY, timeWidth, timeHeight);
-  rect(time1X, time1Y, time1Width, time1Height);
-  rect(time2X, time2Y, time2Width, time2Height);
-  rect(more1X, more1Y, more1Width, more1Height);
-  rect(more2X, more2Y, more2Width, more2Height);
-  rect(more3X, more3Y, more3Width, more3Height);
+  
+  // Draw symbol
+  fill(nightMode ? btnShapeNight : btnShapeDay);
+  previousSymbol();
 }
 
-// Draw inner button shapes / triangles / circles / plus / minus / stars / lines
-void musicButtonShapes() {
-  // Previous Triangle
-  triangle(previousX + previousWidth*3/8, previousY + previousHeight/2,
-           previousX + previousWidth*3/4, previousY + previousHeight/4,
-           previousX + previousWidth*3/4, previousY + previousHeight*3/4);
+void previousButtonActive() {
+  // Fill background (hover state)
+  fill(nightMode ? btnHoverBackgroundNight : btnHoverBackgroundDay);
+  rect(previousX, previousY, previousWidth, previousHeight);
+  
+  // Draw symbol (hover state)
+  fill(nightMode ? btnHoverShapeNight : btnHoverShapeDay);
+  previousSymbol();
+}
 
-  // Play Triangle
-  triangle(playX + playWidth*1/4, playY + playHeight*1/4,
-           playX + playWidth*1/4, playY + playHeight*3/4,
-           playX + playWidth*3/4, playY + playHeight/2);
+void previousSymbol() {
+  // Vertical bar on left
+  rect(previousX + previousWidth * 1/4, previousY + previousHeight * 1/4, 
+       previousWidth * 1/8, previousHeight * 1/2);
+  
+  // Triangle pointing left
+  triangle(previousX + previousWidth * 3/8, previousY + previousHeight * 1/2,
+           previousX + previousWidth * 3/4, previousY + previousHeight * 1/4,
+           previousX + previousWidth * 3/4, previousY + previousHeight * 3/4);
+}
 
-  // Forward Triangle
-  triangle(forwardX + forwardWidth*1/4, forwardY + forwardHeight*1/4,
-           forwardX + forwardWidth*1/4, forwardY + forwardHeight*3/4,
-           forwardX + forwardWidth*5/8, forwardY + forwardHeight/2);
-  rect(forwardX + forwardWidth*5/8, forwardY + forwardHeight*1/4, forwardWidth*1/8, forwardHeight*1/2);
+// ==================== PLAY/PAUSE BUTTON ====================
 
-  // Volume Bar
-  float padding = volumeWidth*0.25;
-  float notesLineY = volumeY + volumeHeight/2;
-  line(volumeX + padding, notesLineY, volumeX + volumeWidth - padding, notesLineY);
-  line(volumeX + padding - padding*0.25, notesLineY, volumeX + padding + padding*0.25, notesLineY); // Minus
-  float plusX = volumeX + volumeWidth - padding + padding*0.5;
-  line(plusX - padding*0.25, notesLineY, plusX + padding*0.25, notesLineY); // Plus horizontal
-  line(plusX, notesLineY - padding*0.25, plusX, notesLineY + padding*0.25); // Plus vertical
+void playButtonRegular() {
+  // Fill background
+  fill(nightMode ? btnBackgroundNight : btnBackgroundDay);
+  rect(playX, playY, playWidth, playHeight);
+  
+  // Draw symbol based on state
+  fill(nightMode ? btnShapeNight : btnShapeDay);
+  if (playButtonState) {
+    pauseSymbol();
+  } else {
+    playSymbol();
+  }
+}
 
-  // More Buttons Circles
-  ellipse(more1X + more1Width/2, more1Y + more1Height/2, min(more1Width, more1Height)*0.6, min(more1Width, more1Height)*0.6);
-  ellipse(more2X + more2Width/2, more2Y + more2Height/2, min(more2Width, more2Height)*0.6, min(more2Width, more2Height)*0.6);
-  ellipse(more3X + more3Width/2, more3Y + more3Height/2, min(more3Width, more3Height)*0.6, min(more3Width, more3Height)*0.6);
+void playButtonActive() {
+  // Fill background (hover state)
+  fill(nightMode ? btnHoverBackgroundNight : btnHoverBackgroundDay);
+  rect(playX, playY, playWidth, playHeight);
+  
+  // Draw symbol based on state (hover)
+  fill(nightMode ? btnHoverShapeNight : btnHoverShapeDay);
+  if (playButtonState) {
+    pauseSymbol();
+  } else {
+    playSymbol();
+  }
+}
 
-  // Three lines button
-  rect(threeX + threeWidth*1/4, threeY + threeHeight*1/8, threeWidth*1/2, threeHeight*1.5/8);
-  rect(threeX + threeWidth*1/4, threeY + threeHeight*2.9/8, threeWidth*1/2, threeHeight*1.5/8);
-  rect(threeX + threeWidth*1/4, threeY + threeHeight*4.9/8, threeWidth*1/2, threeHeight*1.5/8);
+void playSymbol() {
+  // Triangle pointing right
+  triangle(playX + playWidth * 1/4, playY + playHeight * 1/4,
+           playX + playWidth * 1/4, playY + playHeight * 3/4,
+           playX + playWidth * 3/4, playY + playHeight * 1/2);
+}
 
-  // Add Button Plus
-  float addPadX = addWidth/4;
-  float addPadY = addHeight/4;
+void pauseSymbol() {
+  // Two vertical bars
+  rect(playX + playWidth * 1/4, playY + playHeight * 1/4,
+       playWidth * 1/8, playHeight * 1/2);
+  rect(playX + playWidth * 5/8, playY + playHeight * 1/4,
+       playWidth * 1/8, playHeight * 1/2);
+}
+
+// ==================== FORWARD BUTTON ====================
+
+void forwardButtonRegular() {
+  // Fill background
+  fill(nightMode ? btnBackgroundNight : btnBackgroundDay);
+  rect(forwardX, forwardY, forwardWidth, forwardHeight);
+  
+  // Draw symbol
+  fill(nightMode ? btnShapeNight : btnShapeDay);
+  forwardSymbol();
+}
+
+void forwardButtonActive() {
+  // Fill background (hover state)
+  fill(nightMode ? btnHoverBackgroundNight : btnHoverBackgroundDay);
+  rect(forwardX, forwardY, forwardWidth, forwardHeight);
+  
+  // Draw symbol (hover state)
+  fill(nightMode ? btnHoverShapeNight : btnHoverShapeDay);
+  forwardSymbol();
+}
+
+void forwardSymbol() {
+  // Triangle pointing right
+  triangle(forwardX + forwardWidth * 1/4, forwardY + forwardHeight * 1/4,
+           forwardX + forwardWidth * 1/4, forwardY + forwardHeight * 3/4,
+           forwardX + forwardWidth * 5/8, forwardY + forwardHeight * 1/2);
+  
+  // Vertical bar on right
+  rect(forwardX + forwardWidth * 5/8, forwardY + forwardHeight * 1/4,
+       forwardWidth * 1/8, forwardHeight * 1/2);
+}
+
+// ==================== PROGRESS BAR ====================
+
+void drawProgressBar() {
+  // Draw background bar
+  fill(nightMode ? #333333 : #CCCCCC);
+  noStroke();
+  rect(timeX, timeY, timeWidth, timeHeight);
+  
+  // Draw progress
+  float progress = getPlaybackProgress();
+  fill(nightMode ? volumeBarNight : volumeBarDay);
+  rect(timeX, timeY, timeWidth * progress, timeHeight);
+  
+  // Draw progress indicator dot
+  float dotX = timeX + (timeWidth * progress);
+  float dotY = timeY + timeHeight / 2;
+  fill(nightMode ? whiteC : blackC);
+  ellipse(dotX, dotY, timeHeight * 2, timeHeight * 2);
+} // End drawProgressBar
+
+// ==================== VOLUME BUTTON ====================
+
+void drawVolumeButton() {
+  // Fill background
+  fill(nightMode ? btnBackgroundNight : btnBackgroundDay);
+  rect(volumeX, volumeY, volumeWidth, volumeHeight);
+  
+  // Draw symbol
+  fill(nightMode ? btnShapeNight : btnShapeDay);
+  noFill();
+  stroke(nightMode ? btnShapeNight : btnShapeDay);
+  strokeWeight(2);
+  
+  // Padding around all sides
+  float padding = volumeWidth * 0.25;
+  
+  // Horizontal Line (Volume Bar)
+  float lineX1 = volumeX + padding;
+  float lineY = volumeY + volumeHeight / 2;
+  float lineX2 = volumeX + volumeWidth - padding;
+  line(lineX1, lineY, lineX2, lineY);
+  
+  // Minus Sign (-)
+  float minusX = lineX1 - padding * 0.5;
+  float minusY = lineY;
+  float minusSize = padding * 0.5;
+  line(minusX - minusSize / 2, minusY, minusX + minusSize / 2, minusY);
+  
+  // Plus Sign (+)
+  float plusX = lineX2 + padding * 0.5;
+  float plusY = lineY;
+  float plusSize = padding * 0.5;
+  line(plusX - plusSize / 2, plusY, plusX + plusSize / 2, plusY); // Horizontal
+  line(plusX, plusY - plusSize / 2, plusX, plusY + plusSize / 2); // Vertical
+  
+  strokeWeight(1);
+  stroke(nightMode ? resetInkNight : resetInkDay);
+}
+
+void drawVolumeButtonHover() {
+  // Fill background (hover)
+  fill(nightMode ? btnHoverBackgroundNight : btnHoverBackgroundDay);
+  rect(volumeX, volumeY, volumeWidth, volumeHeight);
+  
+  // Draw symbol (hover)
+  fill(nightMode ? btnHoverShapeNight : btnHoverShapeDay);
+  noFill();
+  stroke(nightMode ? btnHoverShapeNight : btnHoverShapeDay);
+  strokeWeight(2);
+  
+  // Padding around all sides
+  float padding = volumeWidth * 0.25;
+  
+  // Horizontal Line (Volume Bar)
+  float lineX1 = volumeX + padding;
+  float lineY = volumeY + volumeHeight / 2;
+  float lineX2 = volumeX + volumeWidth - padding;
+  line(lineX1, lineY, lineX2, lineY);
+  
+  // Minus Sign (-)
+  float minusX = lineX1 - padding * 0.5;
+  float minusY = lineY;
+  float minusSize = padding * 0.5;
+  line(minusX - minusSize / 2, minusY, minusX + minusSize / 2, minusY);
+  
+  // Plus Sign (+)
+  float plusX = lineX2 + padding * 0.5;
+  float plusY = lineY;
+  float plusSize = padding * 0.5;
+  line(plusX - plusSize / 2, plusY, plusX + plusSize / 2, plusY); // Horizontal
+  line(plusX, plusY - plusSize / 2, plusX, plusY + plusSize / 2); // Vertical
+  
+  strokeWeight(1);
+  stroke(nightMode ? resetInkNight : resetInkDay);
+}
+
+// ==================== MORE OPTIONS BUTTONS ====================
+
+void drawMoreButtons() {
+  drawMoreButton1();
+  drawMoreButton2();
+  drawMoreButton3();
+}
+
+void drawMoreButton1() {
+  fill(nightMode ? btnBackgroundNight : btnBackgroundDay);
+  rect(more1X, more1Y, more1Width, more1Height);
+  fill(nightMode ? btnShapeNight : btnShapeDay);
+  float more1CircleX = more1X + more1Width / 2;
+  float more1CircleY = more1Y + more1Height / 2;
+  float more1CircleDiameter = min(more1Width, more1Height) * 0.6;
+  ellipse(more1CircleX, more1CircleY, more1CircleDiameter, more1CircleDiameter);
+}
+
+void drawMoreButton1Hover() {
+  fill(nightMode ? btnHoverBackgroundNight : btnHoverBackgroundDay);
+  rect(more1X, more1Y, more1Width, more1Height);
+  fill(nightMode ? btnHoverShapeNight : btnHoverShapeDay);
+  float more1CircleX = more1X + more1Width / 2;
+  float more1CircleY = more1Y + more1Height / 2;
+  float more1CircleDiameter = min(more1Width, more1Height) * 0.6;
+  ellipse(more1CircleX, more1CircleY, more1CircleDiameter, more1CircleDiameter);
+}
+
+void drawMoreButton2() {
+  fill(nightMode ? btnBackgroundNight : btnBackgroundDay);
+  rect(more2X, more2Y, more2Width, more2Height);
+  fill(nightMode ? btnShapeNight : btnShapeDay);
+  float more2CircleX = more2X + more2Width / 2;
+  float more2CircleY = more2Y + more2Height / 2;
+  float more2CircleDiameter = min(more2Width, more2Height) * 0.6;
+  ellipse(more2CircleX, more2CircleY, more2CircleDiameter, more2CircleDiameter);
+}
+
+void drawMoreButton2Hover() {
+  fill(nightMode ? btnHoverBackgroundNight : btnHoverBackgroundDay);
+  rect(more2X, more2Y, more2Width, more2Height);
+  fill(nightMode ? btnHoverShapeNight : btnHoverShapeDay);
+  float more2CircleX = more2X + more2Width / 2;
+  float more2CircleY = more2Y + more2Height / 2;
+  float more2CircleDiameter = min(more2Width, more2Height) * 0.6;
+  ellipse(more2CircleX, more2CircleY, more2CircleDiameter, more2CircleDiameter);
+}
+
+void drawMoreButton3() {
+  fill(nightMode ? btnBackgroundNight : btnBackgroundDay);
+  rect(more3X, more3Y, more3Width, more3Height);
+  fill(nightMode ? btnShapeNight : btnShapeDay);
+  float more3CircleX = more3X + more3Width / 2;
+  float more3CircleY = more3Y + more3Height / 2;
+  float more3CircleDiameter = min(more3Width, more3Height) * 0.6;
+  ellipse(more3CircleX, more3CircleY, more3CircleDiameter, more3CircleDiameter);
+}
+
+void drawMoreButton3Hover() {
+  fill(nightMode ? btnHoverBackgroundNight : btnHoverBackgroundDay);
+  rect(more3X, more3Y, more3Width, more3Height);
+  fill(nightMode ? btnHoverShapeNight : btnHoverShapeDay);
+  float more3CircleX = more3X + more3Width / 2;
+  float more3CircleY = more3Y + more3Height / 2;
+  float more3CircleDiameter = min(more3Width, more3Height) * 0.6;
+  ellipse(more3CircleX, more3CircleY, more3CircleDiameter, more3CircleDiameter);
+}
+
+// ==================== PLAYLIST BUTTON ====================
+
+void drawPlaylistButton() {
+  // Fill background
+  fill(nightMode ? btnBackgroundNight : btnBackgroundDay);
+  rect(playlistX, playlistY, playlistWidth, playlistHeight);
+  
+  // Draw centered circle inside
+  fill(nightMode ? btnShapeNight : btnShapeDay);
+  float playlistPadding = min(playlistWidth, playlistHeight) * 1/4;
+  float playlistCircleDiameter = min(playlistWidth, playlistHeight) - 2 * playlistPadding;
+  float playlistCircleX = playlistX + playlistWidth / 2;
+  float playlistCircleY = playlistY + playlistHeight / 2;
+  ellipse(playlistCircleX, playlistCircleY, playlistCircleDiameter, playlistCircleDiameter);
+}
+
+void drawPlaylistButtonHover() {
+  // Fill background (hover)
+  fill(nightMode ? btnHoverBackgroundNight : btnHoverBackgroundDay);
+  rect(playlistX, playlistY, playlistWidth, playlistHeight);
+  
+  // Draw centered circle inside (hover)
+  fill(nightMode ? btnHoverShapeNight : btnHoverShapeDay);
+  float playlistPadding = min(playlistWidth, playlistHeight) * 1/4;
+  float playlistCircleDiameter = min(playlistWidth, playlistHeight) - 2 * playlistPadding;
+  float playlistCircleX = playlistX + playlistWidth / 2;
+  float playlistCircleY = playlistY + playlistHeight / 2;
+  ellipse(playlistCircleX, playlistCircleY, playlistCircleDiameter, playlistCircleDiameter);
+}
+
+// ==================== CUSTOMIZE BUTTON (STAR) ====================
+
+void drawCustomizeButton() {
+  // Fill background
+  fill(nightMode ? btnBackgroundNight : btnBackgroundDay);
+  rect(customizeX, customizeY, customizeWidth, customizeHeight);
+  
+  // Draw star symbol
+  fill(nightMode ? btnShapeNight : btnShapeDay);
+  
+  // Padding
+  float customizePadX = customizeWidth * 1/4;
+  float customizePadY = customizeHeight * 1/4;
+  
+  // Center of the rectangle
+  float customizeCenterX = customizeX + customizeWidth * 1/2;
+  float customizeCenterY = customizeY + customizeHeight * 1/2;
+  
+  // Radii for star points
+  float outerRadius = (customizeHeight - 2*customizePadY) / 2;
+  float innerRadius = outerRadius / 2;
+  
+  // Draw 7-point star
+  beginShape();
+  for (int i = 0; i < 14; i++) {
+    float radius = (i % 2 == 0) ? outerRadius : innerRadius;
+    float angle = PI / 7 * i;
+    float x = customizeCenterX + cos(angle) * radius;
+    float y = customizeCenterY + sin(angle) * radius;
+    vertex(x, y);
+  }
+  endShape(CLOSE);
+}
+
+void drawCustomizeButtonHover() {
+  // Fill background (hover)
+  fill(nightMode ? btnHoverBackgroundNight : btnHoverBackgroundDay);
+  rect(customizeX, customizeY, customizeWidth, customizeHeight);
+  
+  // Draw star symbol (hover)
+  fill(nightMode ? btnHoverShapeNight : btnHoverShapeDay);
+  
+  // Padding
+  float customizePadX = customizeWidth * 1/4;
+  float customizePadY = customizeHeight * 1/4;
+  
+  // Center of the rectangle
+  float customizeCenterX = customizeX + customizeWidth * 1/2;
+  float customizeCenterY = customizeY + customizeHeight * 1/2;
+  
+  // Radii for star points
+  float outerRadius = (customizeHeight - 2*customizePadY) / 2;
+  float innerRadius = outerRadius / 2;
+  
+  // Draw 7-point star
+  beginShape();
+  for (int i = 0; i < 14; i++) {
+    float radius = (i % 2 == 0) ? outerRadius : innerRadius;
+    float angle = PI / 7 * i;
+    float x = customizeCenterX + cos(angle) * radius;
+    float y = customizeCenterY + sin(angle) * radius;
+    vertex(x, y);
+  }
+  endShape(CLOSE);
+}
+
+// ==================== NOTES BUTTON ====================
+
+void drawNotesButton() {
+  // Fill background
+  fill(nightMode ? btnBackgroundNight : btnBackgroundDay);
+  rect(notesX, notesY, notesWidth, notesHeight);
+  
+  // Draw symbol
+  fill(nightMode ? btnShapeNight : btnShapeDay);
+  stroke(nightMode ? btnShapeNight : btnShapeDay);
+  strokeWeight(1);
+  
+  // Padding
+  float padX = notesWidth * 1/4;
+  float padY = notesHeight * 1/4;
+  
+  // Inner rectangle (paper)
+  float notesInnerX = notesX + padX;
+  float notesInnerY = notesY + padY;
+  float notesInnerW = notesWidth - padX * 2;
+  float notesInnerH = notesHeight - padY * 2;
+  noFill();
+  rect(notesInnerX, notesInnerY, notesInnerW, notesInnerH, 5);
+  
+  // Folded corner triangle (top-right)
+  fill(nightMode ? btnShapeNight : btnShapeDay);
+  float triSize = notesInnerW * 1/8;
+  triangle(
+    notesInnerX + notesInnerW, notesInnerY,
+    notesInnerX + notesInnerW - triSize, notesInnerY,
+    notesInnerX + notesInnerW, notesInnerY + triSize
+  );
+  
+  // Lines inside (text lines)
+  int numLines = 3;
+  float linePad = notesInnerH * 0.24;
+  for (int i = 1; i <= numLines; i++) {
+    float lineY = notesInnerY + i * linePad;
+    float lineStartX = notesInnerX + notesInnerW * 1/4;
+    float lineEndX = notesInnerX + notesInnerW * 3/4;
+    line(lineStartX, lineY, lineEndX, lineY);
+  }
+  
+  stroke(nightMode ? resetInkNight : resetInkDay);
+}
+
+void drawNotesButtonHover() {
+  // Fill background (hover)
+  fill(nightMode ? btnHoverBackgroundNight : btnHoverBackgroundDay);
+  rect(notesX, notesY, notesWidth, notesHeight);
+  
+  // Draw symbol (hover)
+  fill(nightMode ? btnHoverShapeNight : btnHoverShapeDay);
+  stroke(nightMode ? btnHoverShapeNight : btnHoverShapeDay);
+  strokeWeight(1);
+  
+  // Padding
+  float padX = notesWidth * 1/4;
+  float padY = notesHeight * 1/4;
+  
+  // Inner rectangle (paper)
+  float notesInnerX = notesX + padX;
+  float notesInnerY = notesY + padY;
+  float notesInnerW = notesWidth - padX * 2;
+  float notesInnerH = notesHeight - padY * 2;
+  noFill();
+  rect(notesInnerX, notesInnerY, notesInnerW, notesInnerH, 5);
+  
+  // Folded corner triangle (top-right)
+  fill(nightMode ? btnHoverShapeNight : btnHoverShapeDay);
+  float triSize = notesInnerW * 1/8;
+  triangle(
+    notesInnerX + notesInnerW, notesInnerY,
+    notesInnerX + notesInnerW - triSize, notesInnerY,
+    notesInnerX + notesInnerW, notesInnerY + triSize
+  );
+  
+  // Lines inside (text lines)
+  int numLines = 3;
+  float linePad = notesInnerH * 0.24;
+  for (int i = 1; i <= numLines; i++) {
+    float lineY = notesInnerY + i * linePad;
+    float lineStartX = notesInnerX + notesInnerW * 1/4;
+    float lineEndX = notesInnerX + notesInnerW * 3/4;
+    line(lineStartX, lineY, lineEndX, lineY);
+  }
+  
+  stroke(nightMode ? resetInkNight : resetInkDay);
+}
+
+// ==================== LANGUAGE BUTTONS ====================
+
+void drawArabicButton() {
+  fill(nightMode ? btnBackgroundNight : btnBackgroundDay);
+  rect(arabicX, arabicY, arabicWidth, arabicHeight);
+}
+
+void drawArabicButtonHover() {
+  fill(nightMode ? btnHoverBackgroundNight : btnHoverBackgroundDay);
+  rect(arabicX, arabicY, arabicWidth, arabicHeight);
+}
+
+void drawEnglishButton() {
+  fill(nightMode ? btnBackgroundNight : btnBackgroundDay);
+  rect(englishX, englishY, englishWidth, englishHeight);
+}
+
+void drawEnglishButtonHover() {
+  fill(nightMode ? btnHoverBackgroundNight : btnHoverBackgroundDay);
+  rect(englishX, englishY, englishWidth, englishHeight);
+}
+
+// ==================== TOP MENU BUTTONS ====================
+
+// Three-Dot Menu Button
+void drawThreeDotsMenu() {
+  fill(nightMode ? btnBackgroundNight : btnBackgroundDay);
+  rect(threeX, threeY, threeWidth, threeHeight);
+  
+  fill(nightMode ? btnShapeNight : btnShapeDay);
+  rect(threeX + threeWidth * 1/4, threeY + threeHeight * 1/8, 
+       threeWidth * 1/2, threeHeight * 1.5/8);
+  rect(threeX + threeWidth * 1/4, threeY + threeHeight * 2.9/8, 
+       threeWidth * 1/2, threeHeight * 1.5/8);
+  rect(threeX + threeWidth * 1/4, threeY + threeHeight * 4.9/8, 
+       threeWidth * 1/2, threeHeight * 1.5/8);
+}
+
+void drawThreeDotsMenuHover() {
+  fill(nightMode ? btnHoverBackgroundNight : btnHoverBackgroundDay);
+  rect(threeX, threeY, threeWidth, threeHeight);
+  
+  fill(nightMode ? btnHoverShapeNight : btnHoverShapeDay);
+  rect(threeX + threeWidth * 1/4, threeY + threeHeight * 1/8, 
+       threeWidth * 1/2, threeHeight * 1.5/8);
+  rect(threeX + threeWidth * 1/4, threeY + threeHeight * 2.9/8, 
+       threeWidth * 1/2, threeHeight * 1.5/8);
+  rect(threeX + threeWidth * 1/4, threeY + threeHeight * 4.9/8, 
+       threeWidth * 1/2, threeHeight * 1.5/8);
+}
+
+// Add Button (Plus Sign)
+void drawAddButton() {
+  fill(nightMode ? btnBackgroundNight : btnBackgroundDay);
+  rect(addX, addY, addWidth, addHeight);
+  
+  fill(nightMode ? btnShapeNight : btnShapeDay);
+  
+  // Padding (1/4 on all sides)
+  float addPadX = addWidth / 4;
+  float addPadY = addHeight / 4;
+  
+  // Coordinates for plus sign
   float left = addX + addPadX;
   float right = addX + addWidth - addPadX;
   float top = addY + addPadY;
   float bottom = addY + addHeight - addPadY;
-  float centerX = addX + addWidth/2;
-  float centerY = addY + addHeight/2;
-  float barWidth = addWidth/4;
-  float barHeight = addHeight/4;
+  float centerX = addX + addWidth / 2;
+  float centerY = addY + addHeight / 2;
+  
+  // Half thickness of the bars
+  float barWidth = addWidth / 4;
+  float barHeight = addHeight / 4;
+  
   beginShape();
+  // Top of vertical bar
   vertex(centerX - barWidth/2, top);
   vertex(centerX - barWidth/2, centerY - barHeight/2);
   vertex(left, centerY - barHeight/2);
@@ -107,85 +703,205 @@ void musicButtonShapes() {
   vertex(centerX + barWidth/2, centerY - barHeight/2);
   vertex(centerX + barWidth/2, top);
   endShape(CLOSE);
-
-  // Customize Star
-  float customizePadX = customizeWidth*1/4;
-  float customizePadY = customizeHeight*1/4;
-  float customizeCenterX = customizeX + customizeWidth/2;
-  float customizeCenterY = customizeY + customizeHeight/2;
-  float outerRadius = (customizeHeight - 2*customizePadY)/2;
-  float innerRadius = outerRadius/2;
-  beginShape();
-  for (int i=0; i<14; i++){
-    float radius = (i%2==0)? outerRadius : innerRadius;
-    float angle = PI/7*i;
-    float x = customizeCenterX + cos(angle)*radius;
-    float y = customizeCenterY + sin(angle)*radius;
-    vertex(x,y);
-  }
-  endShape(CLOSE);
-
-  // Notes Button with folded corner
-  float padX = notesWidth*1/4;
-  float padY = notesHeight*1/4;
-  float notesInnerX = notesX + padX;
-  float notesInnerY = notesY + padY;
-  float notesInnerW = notesWidth - 2*padX;
-  float notesInnerH = notesHeight - 2*padY;
-  rect(notesInnerX, notesInnerY, notesInnerW, notesInnerH, 5);
-  float triSize = notesInnerW*1/8;
-  triangle(notesInnerX + notesInnerW, notesInnerY, notesInnerX + notesInnerW - triSize, notesInnerY, notesInnerX + notesInnerW, notesInnerY + triSize);
-  float notesLinePad = notesInnerH*0.24;
-  for(int i=1;i<=3;i++){
-    float lineY = notesInnerY + i*notesLinePad;
-    line(notesInnerX + notesInnerW*1/4, lineY, notesInnerX + notesInnerW*3/4, lineY);
-  }
-
-  // Search Icon
-  float searchIconX = appWidth*6/16;
-  float searchIconY = appHeight*0/24;
-  float searchIconWidth = appWidth*0.5/16;
-  float searchIconHeight = appHeight*1/24;
-  rect(searchIconX, searchIconY, searchIconWidth, searchIconHeight);
-  float searchPaddingX = searchIconWidth/4;
-  float searchPaddingY = searchIconHeight/4;
-  float circleX = searchIconX + searchIconWidth/2;
-  float circleY = searchIconY + searchIconHeight/2;
-  float circleDiameter = min(searchIconWidth - 2*searchPaddingX, searchIconHeight - 2*searchPaddingY)*0.6;
-  ellipse(circleX, circleY, circleDiameter, circleDiameter);
-  float lineLength = circleDiameter*0.5;
-  line(circleX + circleDiameter/2, circleY + circleDiameter/2, circleX + circleDiameter/2 + lineLength*0.7, circleY + circleDiameter/2 + lineLength*0.7);
-
-  // Playlist Inner Circle
-  float playlistPadding = min(playlistWidth, playlistHeight)*1/4;
-  ellipse(playlistX + playlistWidth/2, playlistY + playlistHeight/2, min(playlistWidth, playlistHeight) - 2*playlistPadding, min(playlistWidth, playlistHeight) - 2*playlistPadding);
-
-  // --- BOOKMARK BUTTON (commented out but preserved) ---
-  /*
-  float bookmarkX = appWidth * 13/16;
-  float bookmarkY = appHeight * 6.5/24;
-  float bookmarkW = appWidth * 2/16;
-  float bookmarkH = appHeight * 1.5/24;
-  rect(bookmarkX, bookmarkY, bookmarkW, bookmarkH);
-  float bookmarkPadX = bookmarkW/4;
-  float bookmarkPadY = bookmarkH/4;
-  beginShape();
-  vertex(bookmarkX + bookmarkPadX, bookmarkY + bookmarkPadY);
-  vertex(bookmarkX + bookmarkW - bookmarkPadX, bookmarkY + bookmarkPadY);
-  vertex(bookmarkX + bookmarkW - bookmarkPadX, bookmarkY + bookmarkH - bookmarkPadY);
-  vertex(bookmarkX + bookmarkW/2, bookmarkY + bookmarkH - bookmarkPadY*0.3);
-  vertex(bookmarkX + bookmarkPadX, bookmarkY + bookmarkH - bookmarkPadY);
-  endShape(CLOSE);
-  */
-
-  // Speed Buttons (commented out, preserved)
-  /*
-  float speedX = appWidth*10/16;
-  float speedY = appHeight*20.4/24;
-  float speedWidth = appWidth*1.5/16;
-  float speedHeight = appHeight*2/24;
-  rect(speedX, speedY, speedWidth, speedHeight);
-  triangle(speedX + speedWidth*1/4, speedY + speedHeight*1/4, speedX + speedWidth*1/4, speedY + speedHeight*3/4, speedX + speedWidth*1/2, speedY + speedHeight/2);
-  triangle(speedX + speedWidth*1/2, speedY + speedHeight*1/4, speedX + speedWidth*1/2, speedY + speedHeight*3/4, speedX + speedWidth*3/4, speedY + speedHeight/2);
-  */
 }
+
+void drawAddButtonHover() {
+  fill(nightMode ? btnHoverBackgroundNight : btnHoverBackgroundDay);
+  rect(addX, addY, addWidth, addHeight);
+  
+  fill(nightMode ? btnHoverShapeNight : btnHoverShapeDay);
+  
+  // Padding (1/4 on all sides)
+  float addPadX = addWidth / 4;
+  float addPadY = addHeight / 4;
+  
+  // Coordinates for plus sign
+  float left = addX + addPadX;
+  float right = addX + addWidth - addPadX;
+  float top = addY + addPadY;
+  float bottom = addY + addHeight - addPadY;
+  float centerX = addX + addWidth / 2;
+  float centerY = addY + addHeight / 2;
+  
+  // Half thickness of the bars
+  float barWidth = addWidth / 4;
+  float barHeight = addHeight / 4;
+  
+  beginShape();
+  // Top of vertical bar
+  vertex(centerX - barWidth/2, top);
+  vertex(centerX - barWidth/2, centerY - barHeight/2);
+  vertex(left, centerY - barHeight/2);
+  vertex(left, centerY + barHeight/2);
+  vertex(centerX - barWidth/2, centerY + barHeight/2);
+  vertex(centerX - barWidth/2, bottom);
+  vertex(centerX + barWidth/2, bottom);
+  vertex(centerX + barWidth/2, centerY + barHeight/2);
+  vertex(right, centerY + barHeight/2);
+  vertex(right, centerY - barHeight/2);
+  vertex(centerX + barWidth/2, centerY - barHeight/2);
+  vertex(centerX + barWidth/2, top);
+  endShape(CLOSE);
+}
+
+// Search Icon
+void drawSearchIcon() {
+  fill(nightMode ? btnBackgroundNight : btnBackgroundDay);
+  rect(searchIconX, searchIconY, searchIconWidth, searchIconHeight);
+  
+  noFill();
+  stroke(nightMode ? btnShapeNight : btnShapeDay);
+  strokeWeight(2);
+  
+  // Padding
+  float paddingX = searchIconWidth / 4;
+  float paddingY = searchIconHeight / 4;
+  
+  // Circle
+  float circleDiameter = min(searchIconWidth - 2 * paddingX, searchIconHeight - 2 * paddingY) * 0.6;
+  float circleX = searchIconX + searchIconWidth / 2;
+  float circleY = searchIconY + searchIconHeight / 2;
+  ellipse(circleX, circleY, circleDiameter, circleDiameter);
+  
+  // Line (handle)
+  float lineLength = circleDiameter * 0.5;
+  float lineStartX = circleX + circleDiameter / 2;
+  float lineStartY = circleY + circleDiameter / 2;
+  float lineEndX = lineStartX + lineLength * 0.7;
+  float lineEndY = lineStartY + lineLength * 0.7;
+  line(lineStartX, lineStartY, lineEndX, lineEndY);
+  
+  strokeWeight(1);
+  stroke(nightMode ? resetInkNight : resetInkDay);
+}
+
+void drawSearchIconHover() {
+  fill(nightMode ? btnHoverBackgroundNight : btnHoverBackgroundDay);
+  rect(searchIconX, searchIconY, searchIconWidth, searchIconHeight);
+  
+  noFill();
+  stroke(nightMode ? btnHoverShapeNight : btnHoverShapeDay);
+  strokeWeight(2);
+  
+  // Padding
+  float paddingX = searchIconWidth / 4;
+  float paddingY = searchIconHeight / 4;
+  
+  // Circle
+  float circleDiameter = min(searchIconWidth - 2 * paddingX, searchIconHeight - 2 * paddingY) * 0.6;
+  float circleX = searchIconX + searchIconWidth / 2;
+  float circleY = searchIconY + searchIconHeight / 2;
+  ellipse(circleX, circleY, circleDiameter, circleDiameter);
+  
+  // Line (handle)
+  float lineLength = circleDiameter * 0.5;
+  float lineStartX = circleX + circleDiameter / 2;
+  float lineStartY = circleY + circleDiameter / 2;
+  float lineEndX = lineStartX + lineLength * 0.7;
+  float lineEndY = lineStartY + lineLength * 0.7;
+  line(lineStartX, lineStartY, lineEndX, lineEndY);
+  
+  strokeWeight(1);
+  stroke(nightMode ? resetInkNight : resetInkDay);
+}
+
+// Search Bar
+void drawSearchBar() {
+  fill(nightMode ? btnBackgroundNight : btnBackgroundDay);
+  rect(searchX, searchY, searchWidth, searchHeight);
+  
+  // Inner rounded rectangle
+  fill(nightMode ? #1F2937 : #FFFFFF);
+  float searchPaddingX = searchWidth / 8;
+  float searchPaddingY = searchHeight / 4;
+  float innerX = searchX + searchPaddingX;
+  float innerY = searchY + searchPaddingY;
+  float innerWidth = searchWidth - 2 * searchPaddingX;
+  float innerHeight = searchHeight - 2 * searchPaddingY;
+  float cornerRadius = innerHeight / 2;
+  rect(innerX, innerY, innerWidth, innerHeight, cornerRadius);
+}
+
+// ==================== MOUSE INTERACTIONS ====================
+
+void buttonMousePressed() {
+  // Previous Button Clicked
+  if (mouseX > previousX && mouseX < previousX + previousWidth && 
+      mouseY > previousY && mouseY < previousY + previousHeight) {
+    println("Previous Button Pressed");
+    previousSong();
+  }
+  
+  // Play/Pause Button Clicked
+  if (mouseX > playX && mouseX < playX + playWidth && 
+      mouseY > playY && mouseY < playY + playHeight) {
+    println("Play/Pause Button Pressed");
+    playButtonState = !playButtonState;
+    
+    if (playButtonState) {
+      playList[currentSong].play();
+    } else {
+      playList[currentSong].pause();
+    }
+  }
+  
+  // Forward Button Clicked
+  if (mouseX > forwardX && mouseX < forwardX + forwardWidth && 
+      mouseY > forwardY && mouseY < forwardY + forwardHeight) {
+    println("Forward Button Pressed");
+    nextSong();
+  }
+  
+  // Progress Bar Clicked (seek to position)
+  if (mouseX > timeX && mouseX < timeX + timeWidth && 
+      mouseY > timeY && mouseY < timeY + timeHeight) {
+    println("Progress Bar Clicked");
+    seekToPosition();
+  }
+  
+  // Volume Button Clicked
+  if (mouseX > volumeX && mouseX < volumeX + volumeWidth && 
+      mouseY > volumeY && mouseY < volumeY + volumeHeight) {
+    println("Volume Button Pressed");
+    // Toggle mute
+    if (playList[currentSong].isMuted()) {
+      playList[currentSong].unmute();
+    } else {
+      playList[currentSong].mute();
+    }
+  }
+  
+  // Add Button Clicked
+  if (mouseX > addX && mouseX < addX + addWidth && 
+      mouseY > addY && mouseY < addY + addHeight) {
+    println("Add Button Pressed");
+    // Add to playlist functionality
+  }
+  
+  // Three Dots Menu Clicked
+  if (mouseX > threeX && mouseX < threeX + threeWidth && 
+      mouseY > threeY && mouseY < threeY + threeHeight) {
+    println("Menu Button Pressed");
+    // Show menu functionality
+  }
+  
+  // Customize Button Clicked
+  if (mouseX > customizeX && mouseX < customizeX + customizeWidth && 
+      mouseY > customizeY && mouseY < customizeY + customizeHeight) {
+    println("Customize Button Pressed");
+    nightMode = !nightMode; // Toggle night mode
+  }
+} // End buttonMousePressed
+
+// Seek to clicked position in song
+void seekToPosition() {
+  float clickPosition = (mouseX - timeX) / timeWidth;
+  clickPosition = constrain(clickPosition, 0, 1);
+  
+  int newPosition = int(playList[currentSong].length() * clickPosition);
+  playList[currentSong].cue(newPosition);
+  
+  println("Seeked to:", formatTime(newPosition));
+} // End seekToPosition
+
+// End Buttons Subprogram

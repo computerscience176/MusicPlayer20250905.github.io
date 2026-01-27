@@ -1,253 +1,225 @@
-/* Creating Buttons - HoverOver in draw()
- - Add Minim from Sketch / Import Library / Minim
- - Display: fullScreen() v. use shorter side as a Square based on fullScreen
- - DIVs and Global Variables, includes DIV Population
+/* Music Player Application
+ * Main Program File
+ * Created: 2026
+ * 
+ * This program creates a full-featured music player with:
+ * - Play/Pause/Stop/Forward/Previous controls
+ * - Volume control
+ * - Playlist management
+ * - Song metadata display
+ * - Night/Day mode toggle
+ * - Album artwork display
  */
-//
-//Library - Minim
+
+// Library - Minim
 import ddf.minim.*;
 import ddf.minim.analysis.*;
 import ddf.minim.effects.*;
 import ddf.minim.signals.*;
 import ddf.minim.spi.*;
 import ddf.minim.ugens.*;
-//
-//Global Variables
-int appWidth, appHeight;
-float topPanelX, topPanelY, topPanelWidth, topPanelHeight;
-float logoX, logoY, logoWidth, logoHeight;
-float websiteNameX, websiteNameY, websiteNameWidth, websiteNameHeight;
-float profileX, profileY, profileWidth, profileHeight;
-float accountX, accountY, accountWidth, accountHeight;
-float imageX, imageY, imageWidth, imageHeight;
-float titleX, titleY, titleWidth, titleHeight;
-float textboxX, textboxY, textboxWidth, textboxHeight;
-float aboutX, aboutY, aboutWidth, aboutHeight;
-float byX, byY, byWidth, byHeight;
-float lyricsX, lyricsY, lyricsWidth, lyricsHeight;
-float iconBoxX, iconBoxY, iconBoxWidth, iconBoxHeight;
-float arabicX, arabicY, arabicWidth, arabicHeight;
-float englishX, englishY, englishWidth, englishHeight;
-float notesX, notesY, notesWidth, notesHeight;
-float rectanglearoundtimeX, rectanglearoundtimeY, rectanglearoundtimeWidth, rectanglearoundtimeHeight;
-float forwordX, forwordY, forwordWidth, forwordHeight;
-float more2X, more2Y, more2Width, more2Height;
-float more3X, more3Y, more3Width, more3Height;
-float previousX, previousY, previousWidth, previousHeight;
-float playX, playY, playWidth, playHeight;
-float forwardX, forwardY, forwardWidth, forwardHeight;
-float volumeX, volumeY, volumeWidth, volumeHeight;
-float more1X, more1Y, more1Width, more1Height;
-float addX, addY, addWidth, addHeight;
-float threeX, threeY, threeWidth, threeHeight;
-float customizeX, customizeY, customizeWidth, customizeHeight;
-float searchX, searchY, searchWidth, searchHeight;
-float searchIconX, searchIconY, searchIconWidth, searchIconHeight;
-float playlistX, playlistY, playlistWidth, playlistHeight;
-float timeBoxX, timeBoxY, timeBoxWidth, timeBoxHeight;
-float timeX, timeY, timeWidth, timeHeight;
-float time1X, time1Y, time1Width, time1Height;
-float time2X, time2Y, time2Width, time2Height;
 
-// Inner shapes (triangles, circles)
-float previousTriX1, previousTriY1, previousTriX2, previousTriY2, previousTriX3, previousTriY3;
-float playTriX1, playTriY1, playTriX2, playTriY2, playTriX3, playTriY3;
-float forwardTriX1, forwardTriY1, forwardTriX2, forwardTriY2, forwardTriX3, forwardTriY3;
+// Global Variables - See GlobalVariables.pde for all declarations
 
-// More button circles
-float more1CircleX, more1CircleY, more1CircleDiameter;
-float more2CircleX, more2CircleY, more2CircleDiameter;
-float more3CircleX, more3CircleY, more3CircleDiameter;
-
-// Add button plus coordinates
-float addPadX, addPadY, addLeft, addRight, addTop, addBottom, addCenterX, addCenterY;
-float addBarWidth, addBarHeight;
-
-// Notes button inner rectangle
-float notesInnerX, notesInnerY, notesInnerW, notesInnerH;
-float triSize, notesLinePad;
-
-// Customize star
-float customizePadX, customizePadY, customizeCenterX, customizeCenterY;
-float outerRadius, innerRadius;
-
-// Search Icon
-float searchPaddingX, searchPaddingY;
-float circleX, circleY, circleDiameter;
-float lineStartX, lineStartY, lineEndX, lineEndY;
-
-// Playlist inner circle
-float playlistPadding, playlistCircleX, playlistCircleY, playlistCircleDiameter;
-
-//
-Boolean playButton=false, quitButton=false;//
-//color population
-color resetBackground, resetInk, resetBackgroundDay, resetInkDay, resetBackgroundNight, resetInkNight;
-color quitButtonInk;
-color softNavy, lightBlue, offWhite, cream, boldRed, white, black, charcoal;
-color playColourBackground, playColourSymbol, playColourBackgroundActivated, playColourSymbolActivated;
-color quitBackground, quitBackgroundActivated;
-Boolean nightMode = false;
-/*
-void settings() {
- println(displayWidth, displayHeight);
- int shorterSide = ( displayWidth > displayHeight ) ? displayHeight : displayWidth ; //Ternary Operator
- shorterSide *= 0.9; //90%, WINDOW Frame
- size(shorterSide, shorterSide); //ERROR IllegalStateException: cannot use a var in size()
- println("Display Questions", displayWidth, displayHeight, shorterSide);
- println("CANVAS Size Key Variables for setup()", width, height);
- } //End settings
- */
 void setup() {
-  //Display CANVAS
-  //size(); //width //height
-  fullScreen(); //displayWidth //displayHeight
+  // Display CANVAS
+  fullScreen(); // Uses displayWidth and displayHeight
   appWidth = displayWidth;
   appHeight = displayHeight;
-  //
-  divPopulation ();
-  DIVs();
-  musicButtonShapes();
+  
+  // Initialize all subprograms
+  divPopulation();
   nightMode = false;
   colourPopulation();
   musicSetup();
   textSetup();
-} //End setup
-//
+  imageSetup();
+  
+  // Load metadata for all songs
+  for (int i = 0; i < numberOfSongs; i++) {
+    playListMetaData[i] = playList[i].getMetaData();
+  }
+  
+  println("Music Player Initialized Successfully");
+  println("Number of Songs:", numberOfSongs);
+  println("Canvas Size:", appWidth, "x", appHeight);
+} // End setup
+
 void draw() {
-  background(resetBackgroundDay);  // **CRITICAL** - CLEAR SCREEN
-  DIVs();                         // Your rectangles
-  musicButtonShapes();            // Your buttons  
-  textdraw();                     // **TEXT LAST** - on top
-  //println ("My Mouse is", mouseX, mouseY);
-  //println (playButton);
-  //hoverOver_draw(); //See Buttons
-} //End draw
-//
+  // Set background based on night mode
+  background(nightMode ? resetBackgroundNight : resetBackgroundDay);
+  
+  // Draw all UI elements
+  divPopulation();
+  drawButtons();
+  textdraw();
+  
+  // Update time display if song is playing
+  if (playList[currentSong].isPlaying()) {
+    updateTimeDisplay();
+  }
+  
+  // Debug: Uncomment to see mouse position
+  // println("Mouse Position:", mouseX, mouseY);
+} // End draw
+
 void mousePressed() {
-} //End Mouse Pressed
-//
+  buttonMousePressed();
+} // End mousePressed
+
 void keyPressed() {
-  /* Key Board Short Cuts ... learning what the Music Buttons could be
-   Note: CAP Lock with ||
-   if ( key==? || key==? ) ; //'' only
-   -
-   if ( key==CODED || keyCode==SpecialKey ) ; //Special Keys abriviated CAPS
-   -
-   All Music Player Features are built out of these Minim AudioPlayer() functions
-   .isPlaying()
-   .isMuted()
-   .loop(0), parameter is number of iterations after play
-   .loop(), parameter is infinite interations
-   .play(), parameter is built-in skip (milli-seconds or crystal-time)
-   .pause()
-   .rewind()
-   .skip()
-   .unmute()
-   .mute()
-   -
-   Lesson Music Button Features based on single, double, and spamming taps
-   - Play
-   - Pause
-   - Stop
-   - Loop Once
-   - Loop Infinite
-   - Fast Forward
-   - Fast Rewind
-   - Mute
-   - Next Song
-   - Previous Song
-   - Shuffle
-   -
-   - Advanced Buttons & Combinations
-   - Play-Pause-Stop
-   - Auto Play
-   - Random Song
+  /* Keyboard Shortcuts for Music Player
+   * P/p - Play (with loop for double-tap)
+   * O/o - Pause/Resume toggle
+   * S/s - Stop (pause on first press, rewind on second)
+   * L/l - Loop once
+   * K/k - Loop infinitely
+   * F/f - Fast forward (+10 seconds)
+   * R/r - Rewind (-10 seconds)
+   * W/w - Mute toggle
+   * N/n - Next song
+   * B/b - Previous song
+   * Y/y - Random song
+   * M/m - Toggle night mode
+   * ESC - Exit application
    */
-  //if ( key=='P' || key=='p' ) playList[currentSong].play(); //Simple Play, no double tap possible
-  //
-  if ( key=='P' || key=='p' ) playList[currentSong].loop(0); //Simple Play, double tap possible
-  /* Note: double tap is automatic rewind, no pause
-   Symbol is two triangles
-   This changes what the button might become after it is pressed
-   */
-  if ( key=='O' || key=='o' ) { // Pause
-    //
-    if ( playList[currentSong].isPlaying() ) {
+  
+  // Play with loop (allows double-tap to restart)
+  if (key == 'P' || key == 'p') {
+    playList[currentSong].loop(0);
+    playButtonState = true;
+  }
+  
+  // Pause/Resume toggle
+  if (key == 'O' || key == 'o') {
+    if (playList[currentSong].isPlaying()) {
       playList[currentSong].pause();
+      playButtonState = false;
     } else {
       playList[currentSong].play();
+      playButtonState = true;
     }
   }
-  //if ( key=='S' || key=='s' ) song[currentSong].pause(); //Simple Stop, no double taps
-  //
-  if ( key=='S' | key=='s' ) {
-    if ( playList[currentSong].isPlaying() ) {
-      playList[currentSong].pause(); //single tap
+  
+  // Stop (pause then rewind on second press)
+  if (key == 'S' || key == 's') {
+    if (playList[currentSong].isPlaying()) {
+      playList[currentSong].pause();
+      playButtonState = false;
     } else {
-      playList[currentSong].rewind(); //double tap
+      playList[currentSong].rewind();
     }
   }
-  if ( key=='L' || key=='l' ) playList[currentSong].loop(1); // Loop ONCE: Plays, then plays again, then stops & rewinds
-  if ( key=='K' || key=='k' ) playList[currentSong].loop(); // Loop Infinitely //Parameter: BLANK or -1
-  if ( key=='F' || key=='f' ) playList[currentSong].skip( 10000 ); // Fast Forward, Rewind, & Play Again //Parameter: milliseconds
-  if ( key=='R' || key=='r' ) playList[currentSong].skip( -10000 ); // Fast Reverse & Play //Parameter: negative numbers
-  if ( key=='W' || key=='w' ) { // MUTE
-    //
-    //MUTE Behaviour: stops electricty to speakers, does not stop file
-    //NOTE: MUTE has NO built-in PUASE button, NO built-in rewind button
-    //ERROR: if song near end of file, user will not know song is at the end
-    //Known ERROR: once song plays, MUTE acts like it doesn't work
-    if ( playList[currentSong].isMuted() ) {
-      //ERROR: song might not be playing
-      //CATCH: ask .isPlaying() or !.isPlaying()
+  
+  // Loop controls
+  if (key == 'L' || key == 'l') playList[currentSong].loop(1); // Loop once
+  if (key == 'K' || key == 'k') playList[currentSong].loop(); // Loop infinitely
+  
+  // Skip controls (10 seconds)
+  if (key == 'F' || key == 'f') playList[currentSong].skip(10000); // Forward
+  if (key == 'R' || key == 'r') playList[currentSong].skip(-10000); // Rewind
+  
+  // Mute toggle
+  if (key == 'W' || key == 'w') {
+    if (playList[currentSong].isMuted()) {
       playList[currentSong].unmute();
     } else {
-      //Possible ERROR: Might rewind the song
       playList[currentSong].mute();
     }
   }
-  if ( key==CODED || keyCode==ESC ) exit(); // QUIT //UP
-  //if ( key=='Q' || key=='q' ) exit(); //Depreciated, already coded, See Buttons // QUIT
-  //
-  if ( key=='N' || key=='n' ) { // NEXT //See .txt for starter hint
-    if ( playList[currentSong].isPlaying() ) {
-      playList[currentSong].pause();
-      playList[currentSong].rewind();
-      //
-      if ( currentSong==numberOfSongs-1 ) {
-        currentSong = 0;
-      } else {
-        currentSong++;
-      }
-      playList[currentSong].play();
+  
+  // Next song
+  if (key == 'N' || key == 'n') {
+    nextSong();
+  }
+  
+  // Previous song
+  if (key == 'B' || key == 'b') {
+    previousSong();
+  }
+  
+  // Random song
+  if (key == 'Y' || key == 'y') {
+    int newSong = int(random(numberOfSongs));
+    changeSong(newSong);
+  }
+  
+  // Toggle night mode
+  if (key == 'M' || key == 'm') {
+    nightMode = !nightMode;
+    println("Night Mode:", nightMode ? "ON" : "OFF");
+  }
+  
+  // Exit
+  if (key == CODED || keyCode == ESC) exit();
+} // End keyPressed
+
+// Helper function to change songs
+void changeSong(int newSongIndex) {
+  boolean wasPlaying = playList[currentSong].isPlaying();
+  
+  // Stop current song
+  if (playList[currentSong].isPlaying()) {
+    playList[currentSong].pause();
+  }
+  playList[currentSong].rewind();
+  
+  // Change to new song
+  currentSong = newSongIndex;
+  
+  // Update UI with new song info
+  updateSongInfo();
+  
+  // Auto-play if previous song was playing
+  if (wasPlaying) {
+    playList[currentSong].play();
+  }
+}
+
+// Next song function
+void nextSong() {
+  int nextIndex = (currentSong + 1) % numberOfSongs;
+  changeSong(nextIndex);
+}
+
+// Previous song function
+void previousSong() {
+  int prevIndex = (currentSong - 1 + numberOfSongs) % numberOfSongs;
+  changeSong(prevIndex);
+}
+
+// Update song information display
+void updateSongInfo() {
+  if (playListMetaData[currentSong] != null) {
+    titleText = playListMetaData[currentSong].title();
+    if (titleText == null || titleText.equals("")) {
+      titleText = "Song " + (currentSong + 1);
+    }
+    
+    String author = playListMetaData[currentSong].author();
+    if (author != null && !author.equals("")) {
+      reciterText = "Reciter: " + author;
     } else {
-      //
-      playList[currentSong].rewind();
-      //
-      if ( currentSong==numberOfSongs-1 ) {
-        currentSong = 0;
-      } else {
-        currentSong++;
-      }
-      // NEXT will not automatically play the song
-      //song[currentSong].play();
+      reciterText = "Reciter: Unknown";
     }
   }
-  //if ( key=='B' || key=='b' ) ; // Previous, Back //Students to finish
-  //
-  if ( key=='Y' || key=='y' ) currentSong = int(random(numberOfSongs)); //random(0, numberOfSongs)
-  //
-  //if ( key=='S' || key=='s' ) ; // Shuffle - PLAY (Random)
-  //Note: will randomize the currentSong number
-  //Caution: random() is used very often
-  //Question: how does truncating decimals affect returning random() floats
-  /*
-  if ( key=='' || key=='' ) ; // Play-Pause-STOP //Advanced, beyond single buttons
-   - need to have basic GUI complete first
-   */
-  //
-} //End Key Pressed
-//
+}
 
-//End MAIN Program
+// Update time display
+void updateTimeDisplay() {
+  int currentTime = playList[currentSong].position();
+  int totalTime = playList[currentSong].length();
+  
+  timeCurrentText = formatTime(currentTime);
+  timeTotalText = formatTime(totalTime);
+}
+
+// Format milliseconds to MM:SS
+String formatTime1(int millis) {
+  int seconds = millis / 1000;
+  int minutes = seconds / 60;
+  seconds = seconds % 60;
+  return nf(minutes, 1) + ":" + nf(seconds, 2);
+}
+
+// End Main Program
